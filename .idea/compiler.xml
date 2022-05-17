@@ -9,5 +9,8 @@
         <module name="Senla_Java_Final" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Senla_Java_Final" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

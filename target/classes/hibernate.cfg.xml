@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/private_announcements</property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">root</property>
+    <property name="connection.pool_size">5</property>
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">200</property>
+    <property name="hibernate.c3p0.max_statements">200</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+      <mapping class="com.senla.course.announcementPlatform.model.Announcement"/>
+      <mapping class="com.senla.course.announcementPlatform.model.Chat"/>
+      <mapping class="com.senla.course.announcementPlatform.model.Comment"/>
+      <mapping class="com.senla.course.announcementPlatform.model.Rating"/>
+      <mapping class="com.senla.course.announcementPlatform.model.User"/>
+      <mapping class="com.senla.course.security.model.Role"/>
+      <mapping class="com.senla.course.security.model.UserRole"/>
+  </session-factory>
+</hibernate-configuration>
