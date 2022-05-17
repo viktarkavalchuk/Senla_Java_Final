@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan({"com.senla.course"})
+@ComponentScan({"com.senla.course.announcementPlatform"})
 public class RootConfig {
 
     @Bean
@@ -21,7 +21,7 @@ public class RootConfig {
     public DataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/hotel?serverTimezone=UTC&useSSL=false");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/private_announcements?serverTimezone=UTC&useSSL=false");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;

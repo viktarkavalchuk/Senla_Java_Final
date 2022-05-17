@@ -19,14 +19,11 @@ public class UserController {
     @Qualifier("userServiceImpl")
     @Autowired
     private UserService user;
-//    @Qualifier("announcementServiceImpl")
-//    @Autowired
-//    private AnnouncementService announcement;
 
     @GetMapping
     public String index(Model model) {
-//        model.addAttribute("users", user.getAll());
-        System.out.println("USER: ");
+        model.addAttribute("users", user.getAll());
+        System.out.println("USER: " + user.getAll().get(0).getEmail());
 //        System.out.println("Announcement: " + announcement.getAll().get(0).getName());
 
         return "users/index";

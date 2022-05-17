@@ -20,10 +20,10 @@ public class User implements Serializable {
     private String telephoneNumber;
     @OneToMany(targetEntity = Announcement.class, mappedBy = "user", fetch=FetchType.EAGER)
     private List<Announcement> announcements;
-    @OneToMany(targetEntity = Rating.class, mappedBy = "toUser", fetch=FetchType.EAGER)
-    private List<Rating> ratings;
-    @OneToMany(targetEntity = Chat.class, mappedBy = "chatRecipient", fetch=FetchType.EAGER)
-    private List<Chat> chats;
+//    @OneToMany(targetEntity = Rating.class, mappedBy = "toUser", fetch=FetchType.EAGER)
+//    private List<Rating> ratings;
+//    @OneToMany(targetEntity = Chat.class, mappedBy = "chatRecipient", fetch=FetchType.EAGER)
+//    private List<Chat> chats;
 
     public int getId() {
         return id;
@@ -65,19 +65,19 @@ public class User implements Serializable {
         this.announcements = announcements;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public List<Chat> getChats() {
-        return chats;
-    }
-
-    public void setChats(List<Chat> chats) {
-        this.chats = chats;
-    }
+//    public List<Rating> getRatings() {
+//        return ratings;
+//    }
+//
+//    public void setRatings(List<Rating> ratings) {
+//        this.ratings = ratings;
+//    }
+//
+//    public List<Chat> getChats() {
+//        return chats;
+//    }
+//
+//    public void setChats(List<Chat> chats) {
+//        this.chats = chats;
+//    }
 }
