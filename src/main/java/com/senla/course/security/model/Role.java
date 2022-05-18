@@ -1,5 +1,6 @@
 package com.senla.course.security.model;
 
+
 import javax.persistence.*;
 
 @Entity

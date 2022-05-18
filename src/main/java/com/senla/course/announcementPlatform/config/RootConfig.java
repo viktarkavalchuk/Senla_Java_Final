@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan({"com.senla.course.announcementPlatform"})
+@ComponentScan({"com.senla.course.controller"})
 public class RootConfig {
 
     @Bean
