@@ -23,6 +23,12 @@ public class RoleDao {
 
     public Role getById(Integer id) {
         List<Role> roles = role.getAll();
-        return roles.get(id-1);
+        Role roleById = null;
+        for (Role role: roles) {
+            if (role.getId() == id){
+                roleById = role;
+            }
+        }
+        return roleById;
     }
 }

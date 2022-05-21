@@ -11,15 +11,18 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idRating")
     private int id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "toUser")
     private User toUser;
-    @ManyToOne
-    @JoinColumn(name = "fromUser")
-    private User fromUser;
 
+    @Column(name = "fromUser")
+    private Integer fromUser;
     @Column(name = "rating")
     private Integer rating;
+
+    public Rating() {
+    }
 
     public int getId() {
         return id;
@@ -37,11 +40,11 @@ public class Rating implements Serializable {
         this.toUser = toUser;
     }
 
-    public User getFromUser() {
+    public Integer getFromUser() {
         return fromUser;
     }
 
-    public void setFromUser(User fromUser) {
+    public void setFromUser(Integer fromUser) {
         this.fromUser = fromUser;
     }
 

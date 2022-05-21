@@ -3,13 +3,15 @@ package com.senla.course.announcementPlatform.service;
 import com.senla.course.announcementPlatform.dao.CommentDao;
 import com.senla.course.announcementPlatform.model.Comment;
 import com.senla.course.announcementPlatform.service.interfaces.CommentService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
-
+    private static final Logger logger = LogManager.getLogger();
     @Autowired
     private CommentDao commentDao;
 
@@ -20,7 +22,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(Integer id) {
-        commentDao.delete(getById(id));
+        if (commentDao.getById(id) != null) {
+            commentDao.delete(getById(id));
+        } else {
+            logger.error("Object does not exist");
+        }
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.senla.course.controller;
 
 import com.senla.course.security.model.AuthRequest;
-import com.senla.course.security.service.UserDetailService;
 import com.senla.course.security.utils.JwtUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,15 +21,12 @@ public class AuthenticateController {
 
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
-    private final UserDetailService userDetailService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public AuthenticateController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, UserDetailService userDetailService) {
+    public AuthenticateController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
-        this.userDetailService = userDetailService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/authenticate")
@@ -44,7 +39,6 @@ public class AuthenticateController {
 
             String string = jwtUtil.generateToken(authRequest.getUserName());
             model.addAttribute("Token", string);
-            System.out.println("USER: " + userDetailService.loadUserByUsername("Admin").getAuthorities());
 
         }catch (Exception e){
             logger.error("Invalid username or password" + e);

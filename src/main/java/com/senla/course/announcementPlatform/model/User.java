@@ -23,17 +23,33 @@ public class User implements Serializable {
     private String telephoneNumber;
     @OneToMany(targetEntity = Announcement.class, mappedBy = "user", fetch=FetchType.EAGER)
     private List<Announcement> announcements;
-//    @OneToMany(targetEntity = Rating.class, mappedBy = "toUser", fetch=FetchType.EAGER)
-//    private List<Rating> ratings;
-//    @OneToMany(targetEntity = Chat.class, mappedBy = "chatRecipient", fetch=FetchType.EAGER)
-//    private List<Chat> chats;
+
+    @OneToMany(targetEntity = Rating.class,
+            mappedBy = "toUser",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true)
+    private Set<Rating> ratings;
+
+    @OneToMany(targetEntity = Chat.class,
+            mappedBy = "chatRecipient",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true)
+    private Set<Chat> chatRecipients;
+    @OneToMany(targetEntity = Chat.class,
+            mappedBy = "chatSender",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE,
+            orphanRemoval = true)
+    private Set<Chat> chatSenders;
+
     @Column(name = "login")
     private String login;
     @Column(name = "password")
     private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"),
-            inverseJoinColumns = @JoinColumn(name = "role"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
     private Set<Role> roles;
 
     public int getId() {
@@ -100,19 +116,27 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-//    public List<Rating> getRatings() {
-//        return ratings;
-//    }
-//
-//    public void setRatings(List<Rating> ratings) {
-//        this.ratings = ratings;
-//    }
-//
-//    public List<Chat> getChats() {
-//        return chats;
-//    }
-//
-//    public void setChats(List<Chat> chats) {
-//        this.chats = chats;
-//    }
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public Set<Chat> getChatRecipients() {
+        return chatRecipients;
+    }
+
+    public void setChatRecipients(Set<Chat> chatRecipients) {
+        this.chatRecipients = chatRecipients;
+    }
+
+    public Set<Chat> getChatSenders() {
+        return chatSenders;
+    }
+
+    public void setChatSenders(Set<Chat> chatSenders) {
+        this.chatSenders = chatSenders;
+    }
 }

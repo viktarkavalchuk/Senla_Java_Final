@@ -29,7 +29,13 @@ public class UserDao extends HibernateAbstractDao<User> {
     @Override
     public User getById(Integer id) {
         List<User> users = userDao.getAll();
-        return users.get(id-1);
+        User userById = null;
+        for (User user: users){
+            if (user.getId() == id) {
+                userById = user;
+            }
+        }
+        return userById;
     }
 
     @Override

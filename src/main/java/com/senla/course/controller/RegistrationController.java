@@ -6,7 +6,6 @@ import com.senla.course.security.dao.RoleDao;
 import com.senla.course.security.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,12 +21,16 @@ import java.util.Set;
 public class RegistrationController {
 
     private static final Logger logger = LogManager.getLogger();
-    @Autowired
-    private PasswordEncoder encoder;
-    @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private RoleDao roleDao;
+
+    private final PasswordEncoder encoder;
+    private final UserServiceImpl userService;
+    private final RoleDao roleDao;
+
+    public RegistrationController(PasswordEncoder encoder, UserServiceImpl userService, RoleDao roleDao) {
+        this.encoder = encoder;
+        this.userService = userService;
+        this.roleDao = roleDao;
+    }
 
     @Secured("ROLE_ADMIN")
     @PostMapping
@@ -102,7 +105,6 @@ public class RegistrationController {
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userService.getById(id);
         userService.delete(id);
         return "registration/ok";
     }

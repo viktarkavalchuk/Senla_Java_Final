@@ -13,10 +13,10 @@ public class Chat implements Serializable {
     private int id;
     @Column(name = "message")
     private String message;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chatSender")
     private User chatSender;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chatRecipient")
     private User chatRecipient;
 

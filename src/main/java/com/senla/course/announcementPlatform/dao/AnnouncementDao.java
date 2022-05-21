@@ -30,7 +30,13 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     @Override
     public Announcement getById(Integer id) {
         List<Announcement> announcements = announcementDao.getAll();
-        return announcements.get(id-1);
+        Announcement announcementById = null;
+        for (Announcement announcement: announcements){
+            if (announcement.getId() == id) {
+                announcementById = announcement;
+            }
+        }
+        return announcementById;
     }
 
     @Override
