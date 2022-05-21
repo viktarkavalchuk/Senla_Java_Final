@@ -1,15 +1,18 @@
 package com.senla.course.announcementPlatform.model;
 
+import com.senla.course.security.model.Role;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "private_announcements")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_User")
     private int id;
     @Column(name = "name")
@@ -24,6 +27,14 @@ public class User implements Serializable {
 //    private List<Rating> ratings;
 //    @OneToMany(targetEntity = Chat.class, mappedBy = "chatRecipient", fetch=FetchType.EAGER)
 //    private List<Chat> chats;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "password")
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "role"))
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -63,6 +74,30 @@ public class User implements Serializable {
 
     public void setAnnouncements(List<Announcement> announcements) {
         this.announcements = announcements;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 //    public List<Rating> getRatings() {

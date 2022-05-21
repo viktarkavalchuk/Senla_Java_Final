@@ -14,7 +14,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.senla.course.announcementPlatform")
+@ComponentScan("com.senla.course")
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;

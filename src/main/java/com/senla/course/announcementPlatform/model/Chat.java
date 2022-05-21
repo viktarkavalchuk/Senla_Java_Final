@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Chat implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idChat")
     private int id;
     @Column(name = "message")

@@ -28,7 +28,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
     @Override
     public Rating getById(Integer id) {
         List<Rating> ratings = ratingDao.getAll();
-        return ratings.get(id);
+        return ratings.get(id-1);
     }
 
     @Override

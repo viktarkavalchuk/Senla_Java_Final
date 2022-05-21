@@ -20,6 +20,6 @@
       <mapping class="com.senla.course.announcementPlatform.model.Rating"/>
       <mapping class="com.senla.course.announcementPlatform.model.User"/>
       <mapping class="com.senla.course.security.model.Role"/>
-      <mapping class="com.senla.course.security.model.UserRole"/>
+
   </session-factory>
 </hibernate-configuration>

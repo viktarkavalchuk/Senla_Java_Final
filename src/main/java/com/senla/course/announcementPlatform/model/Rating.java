@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Rating implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idRating")
     private int id;
     @ManyToOne

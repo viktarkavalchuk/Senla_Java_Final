@@ -30,7 +30,7 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
     @Override
     public Comment getById(Integer id) {
         List<Comment> comments = commentDao.getAll();
-        return comments.get(id);
+        return comments.get(id-1);
     }
 
     @Override

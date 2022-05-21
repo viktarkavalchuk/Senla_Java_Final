@@ -1,8 +1,9 @@
-package com.senla.course.security.repository;
+package com.senla.course.security.dao;
 
-
+import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
-import com.senla.course.security.model.UserSecurity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,28 +15,29 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class MyRepository {
+public class UserSecurityDao {
+
+    private static final Logger logger  = LogManager.getLogger();
 
     @Autowired
     public JdbcTemplate jdbcTemplate;
 
-    public UserSecurity getByUserName(String userName) {
+    public User getByUserName(String userName) {
         SessionFactory session = HibernateUtil.getSessionFactory();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<UserSecurity> criteriaQuery = cb.createQuery(UserSecurity.class);
-        Root<UserSecurity> root = criteriaQuery.from(UserSecurity.class);
+        CriteriaQuery<User> criteriaQuery = cb.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root);
 
-        List<UserSecurity> users = HibernateUtil.getSession().createQuery(criteriaQuery).getResultList();
+        List<User> users = HibernateUtil.getSession().createQuery(criteriaQuery).getResultList();
         Integer id = null;
 
-        for (UserSecurity user: users) {
+        for (User user: users) {
             if (user.getLogin().equalsIgnoreCase(userName)){
                 id = user.getId();
                 break;
             }
         }
-
         return users.get(id-1);
     }
 }

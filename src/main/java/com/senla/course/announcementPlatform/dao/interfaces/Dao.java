@@ -1,4 +1,4 @@
-package com.senla.course.announcementPlatform.dao;
+package com.senla.course.announcementPlatform.dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;

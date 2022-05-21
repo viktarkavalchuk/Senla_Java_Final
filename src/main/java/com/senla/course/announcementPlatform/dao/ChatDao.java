@@ -30,7 +30,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
     @Override
     public Chat getById(Integer id) {
         List<Chat> chats = chatDao.getAll();
-        return chats.get(id);
+        return chats.get(id-1);
     }
 
     @Override
