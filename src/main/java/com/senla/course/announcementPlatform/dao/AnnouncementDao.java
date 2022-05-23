@@ -1,8 +1,6 @@
 package com.senla.course.announcementPlatform.dao;
 
 import com.senla.course.announcementPlatform.model.Announcement;
-import com.senla.course.announcementPlatform.model.Rating;
-import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class AnnouncementDao extends HibernateAbstractDao<Announcement> {

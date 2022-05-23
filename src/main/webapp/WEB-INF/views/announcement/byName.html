@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get announcements by name</title>
+</head>
+<p>Announcements by name:</p>
+
+<div th:each="announcement : ${GetByName}">
+    <a th:text="'Number: ' + ${announcement.getId()} + '; '">user</a>
+    <a th:text="'Name: ' + ${announcement.getName()} + '; '">user</a>
+    <a th:text="'Price: ' + ${announcement.getPrice()} + '; '">user</a>
+    <a th:text="'Rating: ' + ${announcement.getRating()} + '; '">user</a>
+</div>
+</body>
+</html>

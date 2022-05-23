@@ -1,7 +1,6 @@
 package com.senla.course.announcementPlatform.service.interfaces;
 
 import com.senla.course.announcementPlatform.model.Announcement;
-import com.senla.course.announcementPlatform.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.senla.course.controller;
 
 import com.senla.course.announcementPlatform.dao.UserDao;
-import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.security.model.AuthRequest;
