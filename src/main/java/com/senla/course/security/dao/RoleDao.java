@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -22,13 +23,11 @@ public class RoleDao {
     }
 
     public Role getById(Integer id) {
-        List<Role> roles = role.getAll();
-        Role roleById = null;
-        for (Role role: roles) {
-            if (role.getId() == id){
-                roleById = role;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Role where id = :paramName");
+        query.setParameter("paramName", id);
+        Role roleById = (Role) query.getSingleResult();
+        session.close();
         return roleById;
     }
 }

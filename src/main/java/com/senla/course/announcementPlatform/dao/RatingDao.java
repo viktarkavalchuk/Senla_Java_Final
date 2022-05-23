@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import java.util.List;
 @Component
 public class RatingDao extends HibernateAbstractDao<Rating> {
@@ -27,13 +28,11 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
 
     @Override
     public Rating getById(Integer id) {
-        List<Rating> ratings = ratingDao.getAll();
-        Rating ratingById = null;
-        for (Rating rating: ratings){
-            if (rating.getId() == id) {
-                ratingById = rating;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Rating where id = :paramName");
+        query.setParameter("paramName", id);
+        Rating ratingById = (Rating) query.getSingleResult();
+        session.close();
         return ratingById;
     }
 
@@ -84,4 +83,5 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
             session.close();
         }
     }
+
 }

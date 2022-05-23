@@ -2,13 +2,22 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Update user</title>
+    <title>Get announcements</title>
 </head>
-<p>User updated successfully:</p>
-    <p th:text="'Id: ' + ${user.getId()} + '; '">user</p>
-    <p th:text="'Name: ' + ${user.getUserName()} + '; '">user</p>
-    <p th:text="'Email: ' + ${user.getEmail()} + '; '">user</p>
-    <p th:text="'Login: ' + ${user.getLogin()} + '; '">user</p>
-    <p th:text="'Telephone number: ' + ${user.getTelephoneNumber()} + '; '">user</p>
+<p>Announcements:</p>
+<p>VIP</p>
+<div th:each="announcement : ${Vip}">
+    <a th:text="'Number: ' + ${announcement.getId()} + '; '">user</a>
+    <a th:text="'Name: ' + ${announcement.getName()} + '; '">user</a>
+    <a th:text="'Price: ' + ${announcement.getPrice()} + '; '">user</a>
+    <a th:text="'Rating: ' + ${announcement.getRating()} + '; '">user</a>
+</div>
+<p>Not VIP</p>
+<div th:each="announcement : ${NotVip}">
+    <a th:text="'Number: ' + ${announcement.getId()} + '; '">user</a>
+    <a th:text="'Name: ' + ${announcement.getName()} + '; '">user</a>
+    <a th:text="'Price: ' + ${announcement.getPrice()} + '; '">user</a>
+    <a th:text="'Rating: ' + ${announcement.getRating()} + '; '">user</a>
+</div>
 </body>
 </html>

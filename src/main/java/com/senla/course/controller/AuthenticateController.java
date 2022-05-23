@@ -1,5 +1,9 @@
 package com.senla.course.controller;
 
+import com.senla.course.announcementPlatform.dao.UserDao;
+import com.senla.course.announcementPlatform.model.User;
+import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
+import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.security.model.AuthRequest;
 import com.senla.course.security.utils.JwtUtil;
 import org.apache.logging.log4j.LogManager;
@@ -22,11 +26,15 @@ public class AuthenticateController {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final UserServiceImpl userService;
+    private final AnnouncementServiceImpl announcementService;
 
-    public AuthenticateController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public AuthenticateController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserServiceImpl userService, UserDao userDao, AnnouncementServiceImpl announcementService) {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
+        this.announcementService = announcementService;
     }
 
     @PostMapping("/authenticate")

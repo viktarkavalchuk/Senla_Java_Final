@@ -2,8 +2,10 @@ package com.senla.course.announcementPlatform.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "announcement", schema = "private_announcements")
@@ -33,6 +35,12 @@ public class Announcement implements Serializable {
     private User user;
     @OneToMany(targetEntity = Comment.class, mappedBy = "announcement", fetch=FetchType.EAGER)
     private List<Comment> comments;
+    @Column(name = "rating_user")
+    private Double rating;
+
+    public Double getRating() {
+        return user.getRatings().stream().collect(Collectors.averagingInt(Rating::getRating));
+    }
 
     public int getId() {
         return id;
@@ -113,4 +121,12 @@ public class Announcement implements Serializable {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public static final Comparator<Announcement> COMPARE_BY_RATING = new Comparator<Announcement>() {
+        @Override
+        public int compare(Announcement lhs, Announcement rhs) {
+            return (int) (lhs.getRating() - rhs.getRating());
+        }
+    };
 }
+

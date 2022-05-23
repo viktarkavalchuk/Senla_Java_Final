@@ -5,10 +5,11 @@ import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/announcement")
@@ -22,9 +23,13 @@ public class AnnouncementController {
 
 
     @GetMapping("/getAll")
-    public String getAnnouncement(){
-        List<Announcement> announcementList = announcementService.getAll();
-        
+    public String getAnnouncement(Model model){
+        List<Announcement> vip = announcementService.getVip();
+        List<Announcement> notVip = announcementService.getNotVip();
+        Collections.sort(notVip, Announcement.COMPARE_BY_RATING.reversed());
+
+        model.addAttribute("NotVip", notVip);
+        model.addAttribute("Vip", vip);
         return "announcement/all";
     }
 }

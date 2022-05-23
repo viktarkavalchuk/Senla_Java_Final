@@ -1,6 +1,8 @@
 package com.senla.course.announcementPlatform.dao;
 
 import com.senla.course.announcementPlatform.model.Announcement;
+import com.senla.course.announcementPlatform.model.Rating;
+import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +11,10 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
@@ -29,13 +34,11 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
 
     @Override
     public Announcement getById(Integer id) {
-        List<Announcement> announcements = announcementDao.getAll();
-        Announcement announcementById = null;
-        for (Announcement announcement: announcements){
-            if (announcement.getId() == id) {
-                announcementById = announcement;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Announcement where id = :paramName");
+        query.setParameter("paramName", id);
+        Announcement announcementById = (Announcement) query.getSingleResult();
+        session.close();
         return announcementById;
     }
 
@@ -85,5 +88,17 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
         finally {
             session.close();
         }
+    }
+    public List<Announcement> getVipAnnouncement() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = true").list();
+        session.close();
+        return announcement;
+    }
+    public List<Announcement> getNotVipAnnouncement() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = false").list();
+        session.close();
+        return announcement;
     }
 }

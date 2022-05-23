@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Component
@@ -29,13 +30,11 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
 
     @Override
     public Chat getById(Integer id) {
-        List<Chat> chats = chatDao.getAll();
-        Chat chatById = null;
-        for (Chat chat: chats){
-            if (chat.getId() == id) {
-                chatById = chat;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Chat where id = :paramName");
+        query.setParameter("paramName", id);
+        Chat chatById = (Chat) query.getSingleResult();
+        session.close();
         return chatById;
     }
 

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Component
@@ -28,13 +29,11 @@ public class UserDao extends HibernateAbstractDao<User> {
 
     @Override
     public User getById(Integer id) {
-        List<User> users = userDao.getAll();
-        User userById = null;
-        for (User user: users){
-            if (user.getId() == id) {
-                userById = user;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where id = :paramName");
+        query.setParameter("paramName", id);
+        User userById = (User) query.getSingleResult();
+        session.close();
         return userById;
     }
 
@@ -86,3 +85,4 @@ public class UserDao extends HibernateAbstractDao<User> {
         }
     }
 }
+

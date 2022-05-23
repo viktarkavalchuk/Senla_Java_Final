@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Component
@@ -29,13 +30,11 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
 
     @Override
     public Comment getById(Integer id) {
-        List<Comment> comments = commentDao.getAll();
-        Comment commentById = null;
-        for (Comment comment: comments){
-            if (comment.getId() == id) {
-                commentById = comment;
-            }
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Comment where id = :paramName");
+        query.setParameter("paramName", id);
+        Comment commentById = (Comment) query.getSingleResult();
+        session.close();
         return commentById;
     }
 
