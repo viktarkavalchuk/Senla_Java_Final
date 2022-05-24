@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public class RoleDao {
 
-    @Autowired
-    private RoleDao role;
 
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();

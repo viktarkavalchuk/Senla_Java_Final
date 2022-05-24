@@ -17,9 +17,6 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @Autowired
-    CommentDao commentDao;
-
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();

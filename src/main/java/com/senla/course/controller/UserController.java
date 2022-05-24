@@ -63,46 +63,6 @@ public class UserController {
         return "user/create";
     }
 
-//    @Secured("ROLE_ADMIN")
-//    @PatchMapping("/{id}")
-//    public String update(@PathVariable("id") int id,
-//                         @RequestParam(value = "name", required = false) String name,
-//                         @RequestParam(value = "email", required = false) String email,
-//                         @RequestParam(value = "telephone_Number", required = false) String telephoneNumber,
-//                         @RequestParam(value = "login", required = false) String login,
-//                         @RequestParam(value = "password", required = false) String password,
-//                         @RequestParam(value = "ROLES", required = false) List<Integer> rolesId,
-//                         Model model){
-//
-//        User user = userService.getById(id);
-//        if (name != null) {
-//            user.setUserName(name);
-//        }
-//        if (email !=  null) {
-//            user.setEmail(email);
-//        }
-//        if (telephoneNumber != null) {
-//            user.setTelephoneNumber(telephoneNumber);
-//        }
-//        if (login != null) {
-//            user.setLogin(login);
-//        }
-//        if (password != null) {
-//            user.setPassword(encoder.encode(password));
-//        }
-//
-//        if (rolesId != null) {
-//            Set<Role> roleSet = new HashSet<>();
-//            for (Integer role : rolesId) {
-//                roleSet.add(roleDao.getById(role));
-//            }
-//            user.setRoles(roleSet);
-//        }
-//        userService.update(user);
-//        model.addAttribute(user);
-//        return "registration/update";
-//    }
-
     @Secured("ROLE_USER")
     @PatchMapping("/{id}")
     public String update(@PathVariable("id") int id,

@@ -2,7 +2,6 @@ package com.senla.course.security.config;
 
 import com.senla.course.security.service.UserDetailService;
 import com.senla.course.security.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +18,13 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private UserDetailService service;
+    private final JwtUtil jwtUtil;
+    private final UserDetailService service;
+
+    public JwtFilter(JwtUtil jwtUtil, UserDetailService service) {
+        this.jwtUtil = jwtUtil;
+        this.service = service;
+    }
 
 
     @Override
@@ -32,6 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String token = null;
         String userName = null;
+
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);

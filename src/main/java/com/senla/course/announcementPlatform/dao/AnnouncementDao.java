@@ -17,9 +17,6 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @Autowired
-    AnnouncementDao announcementDao;
-
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -87,13 +84,13 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     }
     public List<Announcement> getVipAnnouncement() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = true").list();
+        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = true and sold = false").list();
         session.close();
         return announcement;
     }
     public List<Announcement> getNotVipAnnouncement() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = false").list();
+        List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = false and sold = false").list();
         session.close();
         return announcement;
     }

@@ -39,7 +39,17 @@ public class Announcement implements Serializable {
     private Double rating;
 
     public Double getRating() {
-        return user.getRatings().stream().collect(Collectors.averagingInt(Rating::getRating));
+        Double thisRating;
+        if (user.getRatings() == null) {
+            thisRating = rating;
+        } else {
+            thisRating = user.getRatings().stream().collect(Collectors.averagingInt(Rating::getRating));
+        }
+        return thisRating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public int getId() {

@@ -2,14 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Update announcement</title>
+    <title>Registration announcement</title>
 </head>
-<p>Announcement updated successfully:</p>
-    <p th:text="'Id: ' + ${announcement.getId()} + '; '">user</p>
+<p>Announcement created:</p>
     <p th:text="'Name: ' + ${announcement.getName()} + '; '">user</p>
+    <p th:text="'Price: ' + ${announcement.getPrice()} + '; '">user</p>
     <p th:text="'Start date: ' + ${announcement.getStartDate()} + '; '">user</p>
     <p th:text="'Description: ' + ${announcement.getDescription()} + '; '">user</p>
-    <p th:text="'Is VIP: ' + ${announcement.isVip()} + '; '">user</p>
-    <p th:text="'Is SOLD: ' + ${announcement.isSold()} + '; '">user</p>
+    <p th:text="'isVip: ' + ${announcement.isVip()} + '; '">user</p>
 </body>
 </html>

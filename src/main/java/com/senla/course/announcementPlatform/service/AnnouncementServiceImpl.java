@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
+
     private static final Logger logger = LogManager.getLogger();
     private final AnnouncementDao announcementDao;
 

@@ -17,8 +17,6 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
 
     private static final Logger logger = LogManager.getLogger();
 
-    @Autowired
-    ChatDao chatDao;
 
     @Override
     public List getAll() {

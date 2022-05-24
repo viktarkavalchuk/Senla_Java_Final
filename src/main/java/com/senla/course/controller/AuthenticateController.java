@@ -52,5 +52,4 @@ public class AuthenticateController {
         }
         return "/auth";
     }
-
 }

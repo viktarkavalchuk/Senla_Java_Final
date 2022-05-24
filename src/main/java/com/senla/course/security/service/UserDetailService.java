@@ -3,7 +3,6 @@ package com.senla.course.security.service;
 import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.security.dao.UserSecurityDao;
 import com.senla.course.security.model.Role;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +15,11 @@ import java.util.*;
 @Service
 public class UserDetailService implements UserDetailsService {
 
-    @Autowired
-    public UserSecurityDao userSecurityDao;
+    private final UserSecurityDao userSecurityDao;
+
+    public UserDetailService(UserSecurityDao userSecurityDao) {
+        this.userSecurityDao = userSecurityDao;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

@@ -5,7 +5,6 @@ import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +17,12 @@ import java.util.List;
 public class UserSecurityDao {
 
     private static final Logger logger  = LogManager.getLogger();
+    private final JdbcTemplate jdbcTemplate;
+    public static Integer idUserLogin;
 
-    @Autowired
-    public JdbcTemplate jdbcTemplate;
+    public UserSecurityDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public User getByUserName(String userName) {
         SessionFactory session = HibernateUtil.getSessionFactory();
@@ -35,6 +37,7 @@ public class UserSecurityDao {
         for (User user: users) {
             if (user.getLogin().equalsIgnoreCase(userName)){
                 id = user.getId();
+                idUserLogin = (id);
                 break;
             }
         }
