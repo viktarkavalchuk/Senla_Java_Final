@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
@@ -80,6 +79,15 @@ public class UserDao extends HibernateAbstractDao<User> {
         finally {
             session.close();
         }
+    }
+
+    public User getByLogin(String login){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from User where login = :paramName");
+        query.setParameter("paramName", login);
+        User userById = (User) query.getSingleResult();
+        session.close();
+        return userById;
     }
 }
 

@@ -2,6 +2,7 @@ package com.senla.course.announcementPlatform.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 
 @Entity
 @Table(name = "chat", schema = "private_announcements")
@@ -51,4 +52,11 @@ public class Chat implements Serializable {
     public void setChatRecipient(User chatRecipient) {
         this.chatRecipient = chatRecipient;
     }
+
+    public static final Comparator<Chat> COMPARE_BY_ID = new Comparator<Chat>() {
+        @Override
+        public int compare(Chat lhs, Chat rhs) {
+            return (int) (lhs.getId() - rhs.getId());
+        }
+    };
 }

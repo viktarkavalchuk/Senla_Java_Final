@@ -12,7 +12,7 @@ public interface UserService {
     void delete(Integer id);
     void update(User user);
     User getById(Integer id);
-
+    User getByLogin(String login);
     List<User> getAll();
 
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Get chat</title>
+</head>
+<p>Chat:</p>
+
+<div th:each="chat : ${Chats}">
+    <a th:text="'Sender: ' + ${chat.getChatSender.getLogin()} + '; '"></a>
+    <a th:text="'Resipient: ' + ${chat.getChatRecipient.getLogin()} + '; '"></a>
+    <a th:text="'Message: ' + ${chat.getMessage()}"></a>
+</div>
+</body>
+</html>

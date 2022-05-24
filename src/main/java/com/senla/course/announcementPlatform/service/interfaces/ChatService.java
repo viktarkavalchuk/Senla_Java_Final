@@ -13,4 +13,5 @@ public interface ChatService {
     Chat getById(Integer id);
 
     List<Chat> getAll();
+    List<Chat> getChatByUser(String userSender, String userResipient);
 }

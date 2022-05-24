@@ -135,7 +135,7 @@ public class Announcement implements Serializable {
     public static final Comparator<Announcement> COMPARE_BY_RATING = new Comparator<Announcement>() {
         @Override
         public int compare(Announcement lhs, Announcement rhs) {
-            return (int) (lhs.getRating() - rhs.getRating());
+            return (int) (lhs.getRating()*10 - rhs.getRating()*10);
         }
     };
 }

@@ -1,12 +1,12 @@
 package com.senla.course.announcementPlatform.dao;
 
 import com.senla.course.announcementPlatform.model.Announcement;
+import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
@@ -82,15 +82,21 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
             session.close();
         }
     }
-    public List<Announcement> getVipAnnouncement() {
+    public List<Announcement> getVipAnnouncements() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = true and sold = false").list();
         session.close();
         return announcement;
     }
-    public List<Announcement> getNotVipAnnouncement() {
+    public List<Announcement> getNotVipAnnouncements() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = false and sold = false").list();
+        session.close();
+        return announcement;
+    }
+    public List<Announcement> getClosedAnnouncements(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Announcement> announcement = session.createQuery("from Announcement where sold = true").list();
         session.close();
         return announcement;
     }

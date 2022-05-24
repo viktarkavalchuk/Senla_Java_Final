@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ChatServiceImpl implements ChatService {
     private static final Logger logger = LogManager.getLogger();
@@ -42,5 +44,18 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public List<Chat> getAll() {
         return chatDao.getAll();
+    }
+
+    @Override
+    public List<Chat> getChatByUser(String userSender, String userResipient) {
+        List<Chat> allChat = chatDao.getAll();
+
+        List<Chat> list = allChat.stream()
+                .filter(x -> x.getChatSender().getLogin().equalsIgnoreCase(userSender)
+                        || x.getChatSender().getLogin().equalsIgnoreCase(userResipient))
+                .filter(x -> x.getChatRecipient().getLogin().equalsIgnoreCase(userResipient)
+                        || x.getChatRecipient().getLogin().equalsIgnoreCase(userSender))
+                .collect(Collectors.toList());
+        return list;
     }
 }

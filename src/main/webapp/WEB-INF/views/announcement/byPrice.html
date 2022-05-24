@@ -7,10 +7,10 @@
 <p>Announcements by price:</p>
 
 <div th:each="announcement : ${GetByPrice}">
-    <a th:text="'Number: ' + ${announcement.getId()} + '; '">user</a>
-    <a th:text="'Name: ' + ${announcement.getName()} + '; '">user</a>
-    <a th:text="'Price: ' + ${announcement.getPrice()} + '; '">user</a>
-    <a th:text="'Rating: ' + ${announcement.getRating()} + '; '">user</a>
+    <a th:text="'Number: ' + ${announcement.getId()} + '; '"></a>
+    <a th:text="'Name: ' + ${announcement.getName()} + '; '"></a>
+    <a th:text="'Price: ' + ${announcement.getPrice()} + '; '"></a>
+    <a th:text="'Rating: ' + ${announcement.getRating()} + '; '"></a>
 </div>
 </body>
 </html>

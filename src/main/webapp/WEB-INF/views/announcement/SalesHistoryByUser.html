@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Get announcements by name</title>
+    <title>Get closed announcements by User</title>
 </head>
-<p>Announcements by name:</p>
+<p>Closed nnouncements by User:</p>
 
-<div th:each="announcement : ${GetByNameAndPrice}">
+<div th:each="announcement : ${GetSalesHistoryByUser}">
     <a th:text="'Number: ' + ${announcement.getId()} + '; '"></a>
     <a th:text="'Name: ' + ${announcement.getName()} + '; '"></a>
     <a th:text="'Price: ' + ${announcement.getPrice()} + '; '"></a>

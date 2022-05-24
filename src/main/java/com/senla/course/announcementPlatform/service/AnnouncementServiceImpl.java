@@ -2,6 +2,7 @@ package com.senla.course.announcementPlatform.service;
 
 import com.senla.course.announcementPlatform.dao.AnnouncementDao;
 import com.senla.course.announcementPlatform.model.Announcement;
+import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.interfaces.AnnouncementService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,12 +52,18 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public List<Announcement> getVip() {
-        return announcementDao.getVipAnnouncement();
+        return announcementDao.getVipAnnouncements();
     }
 
     @Override
     public List<Announcement> getNotVip() {
-        return announcementDao.getNotVipAnnouncement();
+        return announcementDao.getNotVipAnnouncements();
     }
+
+    @Override
+    public List<Announcement> getClosedAnnouncements() {
+        return announcementDao.getClosedAnnouncements();
+    }
+
 
 }

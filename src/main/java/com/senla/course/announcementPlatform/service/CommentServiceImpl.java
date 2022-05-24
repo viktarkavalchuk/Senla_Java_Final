@@ -1,6 +1,7 @@
 package com.senla.course.announcementPlatform.service;
 
 import com.senla.course.announcementPlatform.dao.CommentDao;
+import com.senla.course.announcementPlatform.model.Announcement;
 import com.senla.course.announcementPlatform.model.Comment;
 import com.senla.course.announcementPlatform.service.interfaces.CommentService;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +38,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment getById(Integer id) {
         return commentDao.getById(id);
+    }
+
+    @Override
+    public List<Comment> getByAnnouncement(Announcement announcement) {
+        return commentDao.getByAnnouncement(announcement);
     }
 
     @Override

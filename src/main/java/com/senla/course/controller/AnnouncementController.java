@@ -65,10 +65,40 @@ public class AnnouncementController {
     @GetMapping("/getByPriceLowerThan")
     public String getAnnouncementByPrice(@RequestParam Integer price, Model model) {
         List<Announcement> getByPrice = announcementService.getAll()
-                .stream().filter(x->x.getPrice()<price).collect(Collectors.toList());
+                .stream().filter(x -> x.getPrice() < price).collect(Collectors.toList());
         model.addAttribute("GetByPrice", getByPrice);
 
         return "announcement/byPrice";
+    }
+
+    @GetMapping("/getSalesHistory")
+    public String getAllSalesHistory(Model model) {
+        List<Announcement> getSalesHistoryByUser = announcementService.getClosedAnnouncements();
+        model.addAttribute("GetSalesHistoryByUser", getSalesHistoryByUser);
+        return "announcement/SalesHistoryByUser";
+    }
+
+    @GetMapping("/getSalesHistory/{id}")
+    public String getSalesHistory(@PathVariable("id") int id, Model model) {
+        User user = userService.getById(id);
+        List<Announcement> getSalesHistoryByUser = announcementService.getClosedAnnouncements()
+                .stream()
+                .filter(x -> x.getUser().getLogin().equals(user.getLogin()))
+                .collect(Collectors.toList());
+        model.addAttribute("GetSalesHistoryByUser", getSalesHistoryByUser);
+
+        return "announcement/SalesHistoryByUser";
+    }
+
+    @Secured("ROLE_ADMIN")
+    @PatchMapping("/vip/{id}")
+    public String setVip(@PathVariable("id") int id,
+                         @RequestParam(value = "vip") Boolean vip) {
+
+        Announcement announcement = announcementService.getById(id);
+        announcement.setVip(vip);
+        announcementService.update(announcement);
+        return "announcement/ok";
     }
 
     @Secured("ROLE_USER")
@@ -76,10 +106,7 @@ public class AnnouncementController {
     public String updateAnnouncement(@PathVariable("id") int id,
                          @RequestParam(value = "name", required = false) String name,
                          @RequestParam(value = "price", required = false) Integer price,
-                         @RequestParam(value = "startDate", required = false) Date startDate,
-                         @RequestParam(value = "soldDate", required = false) Date soldDate,
                          @RequestParam(value = "description", required = false) String description,
-                         @RequestParam(value = "vip", required = false) Boolean vip,
                          @RequestParam(value = "sold", required = false) Boolean sold,
                          Model model){
 
@@ -91,20 +118,15 @@ public class AnnouncementController {
             if (name != null) {
                 announcement.setName(name);
             }
-            if (price !=  null) {
-                announcement.setStartDate(startDate);
-            }
-            if (soldDate != null) {
-                announcement.setEndDate(soldDate);
-            }
             if (description != null) {
                 announcement.setDescription(description);
             }
-            if (vip != null) {
-                announcement.setVip(vip);
-            }
-            if (sold != null) {
+            if (sold != null && sold == true) {
                 announcement.setSold(sold);
+                announcement.setEndDate(new Date());
+                } else if (sold != null && sold == false) {
+                announcement.setSold(sold);
+                announcement.setEndDate(null);
             }
             announcementService.update(announcement);
             model.addAttribute(announcement);
@@ -120,7 +142,6 @@ public class AnnouncementController {
     @PostMapping
     public String createAnnouncement(@RequestParam(value = "name", required = false) String name,
                                      @RequestParam(value = "price", required = false) Integer price,
-                                     @RequestParam(value = "startDate", required = false) Date startDate,
                                      @RequestParam(value = "description", required = false) String description,
                                      Model model){
 
@@ -128,7 +149,7 @@ public class AnnouncementController {
         User user = userService.getById(idUserLogin);
         announcement.setName(name);
         announcement.setPrice(price);
-        announcement.setStartDate(startDate);
+        announcement.setStartDate(new Date());
         announcement.setDescription(description);
         announcement.setUser(user);
         announcement.setVip(false);

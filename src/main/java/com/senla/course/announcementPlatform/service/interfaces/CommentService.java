@@ -1,5 +1,6 @@
 package com.senla.course.announcementPlatform.service.interfaces;
 
+import com.senla.course.announcementPlatform.model.Announcement;
 import com.senla.course.announcementPlatform.model.Comment;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ public interface CommentService {
     void update(Comment comment);
     Comment getById(Integer id);
 
+    List<Comment> getByAnnouncement(Announcement announcement);
     List<Comment> getAll();
 
 }

@@ -1,12 +1,12 @@
 package com.senla.course.announcementPlatform.dao;
 
+import com.senla.course.announcementPlatform.model.Announcement;
 import com.senla.course.announcementPlatform.model.Comment;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
@@ -25,7 +25,15 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
         return comments;
     }
 
-    @Override
+    public List<Comment> getByAnnouncement(Announcement announcement) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Comment where announcement = :paramName");
+        query.setParameter("paramName", announcement);
+        List<Comment> commentByAnnouncement = (List<Comment>) query.getResultList();
+        session.close();
+        return commentByAnnouncement;
+    }
+
     public Comment getById(Integer id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Comment where id = :paramName");
@@ -49,6 +57,8 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
             logger.error("Updating error " + e);
         }
     }
+
+
 
     @Override
     public void delete(Comment entity) {

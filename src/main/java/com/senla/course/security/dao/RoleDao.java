@@ -3,7 +3,6 @@ package com.senla.course.security.dao;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import com.senla.course.security.model.Role;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
