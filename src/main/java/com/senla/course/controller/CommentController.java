@@ -1,7 +1,6 @@
 package com.senla.course.controller;
 
 import com.senla.course.announcementPlatform.model.Announcement;
-import com.senla.course.announcementPlatform.model.Chat;
 import com.senla.course.announcementPlatform.model.Comment;
 import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;

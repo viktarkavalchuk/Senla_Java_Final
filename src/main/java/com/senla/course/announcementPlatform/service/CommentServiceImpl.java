@@ -6,15 +6,18 @@ import com.senla.course.announcementPlatform.model.Comment;
 import com.senla.course.announcementPlatform.service.interfaces.CommentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
     private static final Logger logger = LogManager.getLogger();
-    @Autowired
-    private CommentDao commentDao;
+
+    private final CommentDao commentDao;
+
+    public CommentServiceImpl(CommentDao commentDao) {
+        this.commentDao = commentDao;
+    }
 
     @Override
     public void create(Comment comment) {

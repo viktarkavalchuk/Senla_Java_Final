@@ -14,6 +14,9 @@ import java.util.List;
 public class RatingDao extends HibernateAbstractDao<Rating> {
     private static final Logger logger = LogManager.getLogger();
 
+    public RatingDao() {
+    }
+
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();

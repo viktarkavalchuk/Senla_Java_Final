@@ -5,15 +5,18 @@ import com.senla.course.announcementPlatform.model.Rating;
 import com.senla.course.announcementPlatform.service.interfaces.RatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class RatingServiceImpl implements RatingService {
     private static final Logger logger = LogManager.getLogger();
-    @Autowired
-    private RatingDao ratingDao;
+
+    private final RatingDao ratingDao;
+
+    public RatingServiceImpl(RatingDao ratingDao) {
+        this.ratingDao = ratingDao;
+    }
 
     @Override
     public void create(Rating rating) {

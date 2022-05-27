@@ -1,7 +1,6 @@
 package com.senla.course.announcementPlatform.dao;
 
 import com.senla.course.announcementPlatform.model.Announcement;
-import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.utils.configuration.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +15,9 @@ import java.util.List;
 public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
 
     private static final Logger logger = LogManager.getLogger();
+
+    public AnnouncementDao() {
+    }
 
     @Override
     public List getAll() {

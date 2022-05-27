@@ -55,7 +55,6 @@ public class UserController {
         for (Integer role:  rolesId) {
             roleSet.add(roleDao.getById(role));
         }
-
         user.setRoles(roleSet);
 
         userService.create(user);

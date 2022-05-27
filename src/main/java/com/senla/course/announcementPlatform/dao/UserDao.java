@@ -15,6 +15,9 @@ import java.util.List;
 public class UserDao extends HibernateAbstractDao<User> {
     private static final Logger logger = LogManager.getLogger();
 
+    public UserDao() {
+    }
+
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();

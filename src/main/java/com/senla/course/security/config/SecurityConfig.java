@@ -1,7 +1,6 @@
 package com.senla.course.security.config;
 
 import com.senla.course.security.service.UserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
@@ -20,16 +19,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailService userDetailsService;
-
-    @Autowired
-    private JwtFilter jwtFilter;
+    public SecurityConfig(UserDetailService userDetailsService, JwtFilter jwtFilter) {
+        this.userDetailsService = userDetailsService;
+        this.jwtFilter = jwtFilter;
+    }
 
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+    private final UserDetailService userDetailsService;
+    private final JwtFilter jwtFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
