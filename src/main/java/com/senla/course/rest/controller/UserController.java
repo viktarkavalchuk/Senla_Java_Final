@@ -117,5 +117,7 @@ public class UserController {
         User user = userService.getById(1);
         System.out.println(user.getUserName());
         return new ResponseEntity<>(converter.convertToDto(user, UserDto.class), HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
