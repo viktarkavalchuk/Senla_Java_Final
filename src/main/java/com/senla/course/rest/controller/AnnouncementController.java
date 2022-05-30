@@ -1,4 +1,4 @@
-package com.senla.course.controller;
+package com.senla.course.rest.controller;
 
 import com.senla.course.announcementPlatform.model.Announcement;
 import com.senla.course.announcementPlatform.model.User;
@@ -22,7 +22,8 @@ import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 @Controller
 @RequestMapping("/announcement")
 public class AnnouncementController {
-    private static final Logger logger = LogManager.getLogger();
+
+    private static final Logger logger = LogManager.getLogger(AnnouncementController.class);
     private final AnnouncementServiceImpl announcementService;
     private final UserServiceImpl userService;
 
@@ -36,6 +37,8 @@ public class AnnouncementController {
         List<Announcement> vip = announcementService.getVip();
         List<Announcement> notVip = announcementService.getNotVip();
         Collections.sort(notVip, Announcement.COMPARE_BY_RATING.reversed());
+
+        logger.error("ERRORRRRR");
 
         model.addAttribute("NotVip", notVip);
         model.addAttribute("Vip", vip);

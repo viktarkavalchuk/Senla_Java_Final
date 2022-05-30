@@ -1,11 +1,16 @@
-package com.senla.course.controller;
+package com.senla.course.rest.controller;
 
 import com.senla.course.announcementPlatform.model.User;
+import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
+import com.senla.course.rest.converter.BasicConverter;
+import com.senla.course.rest.dto.UserDto;
 import com.senla.course.security.dao.RoleDao;
 import com.senla.course.security.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,14 +28,18 @@ public class UserController {
 
     private static final Logger logger = LogManager.getLogger();
 
+    private final AnnouncementServiceImpl announcementService;
     private final PasswordEncoder encoder;
     private final UserServiceImpl userService;
     private final RoleDao roleDao;
+    private final BasicConverter<User, UserDto> converter;
 
-    public UserController(PasswordEncoder encoder, UserServiceImpl userService, RoleDao roleDao) {
+    public UserController(AnnouncementServiceImpl announcementService, PasswordEncoder encoder, UserServiceImpl userService, RoleDao roleDao, BasicConverter<User, UserDto> converter) {
+        this.announcementService = announcementService;
         this.encoder = encoder;
         this.userService = userService;
         this.roleDao = roleDao;
+        this.converter = converter;
     }
 
     @Secured("ROLE_ADMIN")
@@ -99,5 +108,14 @@ public class UserController {
     public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "user/ok";
+    }
+
+    @Secured(("ROLE_USER"))
+    @GetMapping("/getId")
+    public ResponseEntity<?> getAllUsers() {
+
+        User user = userService.getById(1);
+        System.out.println(user.getUserName());
+        return new ResponseEntity<>(converter.convertToDto(user, UserDto.class), HttpStatus.OK);
     }
 }

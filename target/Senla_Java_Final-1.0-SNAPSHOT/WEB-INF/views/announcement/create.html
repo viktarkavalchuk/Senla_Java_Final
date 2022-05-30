@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration announcement</title>
+</head>
+<p>Announcement created:</p>
+    <p th:text="'Name: ' + ${announcement.getName()} + '; '"></p>
+    <p th:text="'Price: ' + ${announcement.getPrice()} + '; '"></p>
+    <p th:text="'Start date: ' + ${announcement.getStartDate()} + '; '"></p>
+    <p th:text="'Description: ' + ${announcement.getDescription()} + '; '"></p>
+    <p th:text="'isVip: ' + ${announcement.isVip()} + '; '"></p>
+</body>
+</html>

@@ -63,6 +63,4 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     public List<Announcement> getClosedAnnouncements() {
         return announcementDao.getClosedAnnouncements();
     }
-
-
 }

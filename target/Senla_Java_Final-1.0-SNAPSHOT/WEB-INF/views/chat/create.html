@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration message</title>
+</head>
+<p>Message created:</p>
+    <p th:text="'From sender: ' + ${chat.getChatSender.getLogin()} + '; '"></p>
+    <p th:text="'To recipient: ' + ${chat.getChatRecipient.getLogin()} + '; '"></p>
+    <p th:text="'Message: ' + ${chat.getMessage()} + '; '"></p>
+</body>
+</html>

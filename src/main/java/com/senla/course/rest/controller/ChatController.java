@@ -1,4 +1,4 @@
-package com.senla.course.controller;
+package com.senla.course.rest.controller;
 
 import com.senla.course.announcementPlatform.model.Chat;
 import com.senla.course.announcementPlatform.model.User;
