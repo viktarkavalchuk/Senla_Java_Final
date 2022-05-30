@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
-    private static final Logger logger = LogManager.getLogger();
 
     private final CommentDao commentDao;
 
@@ -26,11 +25,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(Integer id) {
-        if (commentDao.getById(id) != null) {
             commentDao.delete(getById(id));
-        } else {
-            logger.error("Object does not exist");
-        }
     }
 
     @Override

@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger logger = LogManager.getLogger();
 
     private final UserDao userDao;
 
@@ -26,11 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Integer id) {
-        if (userDao.getById(id) != null) {
             userDao.delete(getById(id));
-        } else {
-            logger.error("Object does not exist");
-        }
     }
 
     @Override

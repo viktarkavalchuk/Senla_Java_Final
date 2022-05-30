@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class RatingServiceImpl implements RatingService {
-    private static final Logger logger = LogManager.getLogger();
 
     private final RatingDao ratingDao;
 
@@ -25,11 +24,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void delete(Integer id) {
-        if (ratingDao.getById(id) != null) {
             ratingDao.delete(getById(id));
-        } else {
-            logger.error("Object does not exist");
-        }
     }
 
     @Override

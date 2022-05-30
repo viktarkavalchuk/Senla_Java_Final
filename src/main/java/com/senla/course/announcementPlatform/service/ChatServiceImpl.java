@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ChatServiceImpl implements ChatService {
-    private static final Logger logger = LogManager.getLogger();
+
     private final ChatDao chatDao;
 
     public ChatServiceImpl(ChatDao chatDao) {
@@ -26,11 +26,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public void delete(Integer id) {
-        if (chatDao.getById(id) != null) {
             chatDao.delete(getById(id));
-        } else {
-            logger.error("Object does not exist");
-        }
     }
 
     @Override

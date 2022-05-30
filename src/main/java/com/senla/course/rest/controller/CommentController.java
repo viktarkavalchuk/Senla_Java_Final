@@ -6,17 +6,22 @@ import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.CommentServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
+import com.senla.course.rest.converter.BasicConverter;
+import com.senla.course.rest.dto.CommentDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 
@@ -27,37 +32,46 @@ public class CommentController {
     private final AnnouncementServiceImpl announcementService;
     private final CommentServiceImpl commentService;
     private final UserServiceImpl userService;
+    private final BasicConverter<Comment, CommentDto> converter;
 
 
-    public CommentController(CommentServiceImpl commentService, AnnouncementServiceImpl announcementService, UserServiceImpl userService) {
+    public CommentController(CommentServiceImpl commentService, AnnouncementServiceImpl announcementService, UserServiceImpl userService, BasicConverter<Comment, CommentDto> converter) {
         this.commentService = commentService;
         this.announcementService = announcementService;
         this.userService = userService;
+        this.converter = converter;
     }
 
     @GetMapping("/getAllComments")
-    public String getAllComments(Model model) {
+    public ResponseEntity<?> getAllComments() {
 
         List<Comment> comments = commentService.getAll();
-        model.addAttribute("Comments", comments);
 
-        return "comment/all";
+        return new ResponseEntity<>(comments.stream().map(d -> converter.convertToDto(d, CommentDto.class))
+                .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
 
     @GetMapping("/getCommentsByAnnouncement")
-    public String getCommentsByAnnouncement(@RequestParam(value = "announcement") Integer id,Model model) {
-        Announcement announcement = announcementService.getById(id);
-        List<Comment> comments = commentService.getByAnnouncement(announcement);
-        model.addAttribute("Comments", comments);
+    public ResponseEntity<?> getCommentsByAnnouncement(@RequestParam(value = "announcement") Integer id) {
 
-        return "comment/all";
+        try {
+            Announcement announcement = announcementService.getById(id);
+            List<Comment> comments = commentService.getByAnnouncement(announcement);
+
+            return new ResponseEntity<>(comments.stream().map(d -> converter.convertToDto(d, CommentDto.class))
+                    .collect(Collectors.toList()),
+                    HttpStatus.OK);
+        } catch(NoResultException e) {
+            logger.error("This announcement doesn`t exist, ID announcement: " + id);
+            return new ResponseEntity<>("This announcement doesn`t exist, ID announcement: " + id, HttpStatus.OK);
+        }
     }
 
     @Secured("ROLE_USER")
     @PostMapping
-    public String createComment(@RequestParam(value = "announcementId") Integer id,
-                                @RequestParam(value = "bodyComment") String bodyComment,
-                                Model model){
+    public ResponseEntity<?> createComment(@RequestParam(value = "announcementId") Integer id,
+                                           @RequestParam(value = "bodyComment") String bodyComment) {
 
         User user = userService.getById(idUserLogin);
         Comment comment = new Comment();
@@ -66,8 +80,8 @@ public class CommentController {
         comment.setBodyComment(bodyComment);
 
         commentService.create(comment);
-        model.addAttribute(comment);
-        return "comment/create";
+
+        return new ResponseEntity<>(converter.convertToDto(comment, CommentDto.class), HttpStatus.OK);
     }
 
 }

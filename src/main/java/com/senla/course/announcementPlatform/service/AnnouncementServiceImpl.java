@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
 
-    private static final Logger logger = LogManager.getLogger();
     private final AnnouncementDao announcementDao;
 
     public AnnouncementServiceImpl(AnnouncementDao announcementDao) {
@@ -26,12 +25,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public void delete(Integer id) {
-        Announcement announcement = null;
-        if (announcementDao.getById(id) != null) {
             announcementDao.delete(getById(id));
-        } else {
-            logger.error("Object does not exist");
-        }
     }
 
     @Override

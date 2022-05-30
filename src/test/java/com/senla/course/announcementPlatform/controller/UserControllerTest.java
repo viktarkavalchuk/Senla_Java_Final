@@ -1,6 +1,5 @@
 package com.senla.course.announcementPlatform.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senla.course.announcementPlatform.dao.UserDao;
 import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;

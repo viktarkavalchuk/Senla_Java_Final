@@ -38,12 +38,12 @@ public class AuthenticateController {
                     new UsernamePasswordAuthenticationToken(authRequest.getUserName(),
                             authRequest.getPassword())
             );
-
+            logger.info("Authorization attempt");
             String string = jwtUtil.generateToken(authRequest.getUserName());
-            responseEntity = new ResponseEntity<String>(string, HttpStatus.OK);
+            responseEntity = new ResponseEntity<>(string, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Invalid username or password" + e);
-            responseEntity = new ResponseEntity<String>("Invalid username or password", HttpStatus.OK);
+            responseEntity = new ResponseEntity<>("Invalid username or password", HttpStatus.OK);
         }
         return responseEntity;
     }

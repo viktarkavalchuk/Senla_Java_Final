@@ -29,16 +29,16 @@ public class CommentDto {
         this.bodyComment = bodyComment;
     }
 
-    public User getUserSender() {
-        return userSender;
+    public String getUserSender() {
+        return userSender.getUserName();
     }
 
     public void setUserSender(User userSender) {
         this.userSender = userSender;
     }
 
-    public Announcement getAnnouncement() {
-        return announcement;
+    public String getAnnouncement() {
+        return announcement.getName();
     }
 
     public void setAnnouncement(Announcement announcement) {
