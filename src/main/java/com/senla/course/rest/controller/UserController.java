@@ -45,7 +45,7 @@ public class UserController {
         this.converter = converter;
     }
 
-    @Secured(("ROLE_USER"))
+    @Secured(("ROLE_ADMIN"))
     @GetMapping("/getAllUsers")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userService.getAll();

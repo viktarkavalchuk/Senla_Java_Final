@@ -14,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -109,12 +110,17 @@ public class AnnouncementController {
     @PatchMapping("/vip/{id}")
     public ResponseEntity<?> setVip(@PathVariable("id") int id,
                          @RequestParam(value = "vip") Boolean vip) {
-
-        Announcement announcement = announcementService.getById(id);
-        announcement.setVip(vip);
-        announcementService.update(announcement);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        logger.info("UPDATE: try to update ID Announcement: " + id);
+        try{
+            Announcement announcement = announcementService.getById(id);
+            announcement.setVip(vip);
+            announcementService.update(announcement);
+            logger.info("UPDATE: update ID Announcement: " + id);
+            return new ResponseEntity<>("UPDATE: update ID Announcement: " + id, HttpStatus.OK);
+        } catch (NoResultException e) {
+            logger.error("UPDATE: Can't update ad ID. It doesn't exist: " + id, e);
+            return new ResponseEntity<>("UPDATE: Can't update ad ID. It doesn't exist: " + id, HttpStatus.OK);
+        }
     }
 
     @Secured("ROLE_USER")
@@ -125,30 +131,35 @@ public class AnnouncementController {
                          @RequestParam(value = "description", required = false) String description,
                          @RequestParam(value = "sold", required = false) Boolean sold){
 
-        User user = userService.getById(idUserLogin);
-        Announcement announcement = announcementService.getById(id);
-        String address = null;
-        ResponseEntity responseEntity = null;
-        if (announcement.getUser().getLogin().equalsIgnoreCase(user.getLogin())){
-            if (name != null) {
-                announcement.setName(name);
-            }
-            if (description != null) {
-                announcement.setDescription(description);
-            }
-            if (sold != null && sold == true) {
-                announcement.setSold(sold);
-                announcement.setEndDate(new Date());
+        logger.info("UPDATE: try to update ID Announcement: " + id);
+        try {
+            User user = userService.getById(idUserLogin);
+            Announcement announcement = announcementService.getById(id);
+
+            if (announcement.getUser().getLogin().equalsIgnoreCase(user.getLogin())) {
+                if (name != null) {
+                    announcement.setName(name);
+                }
+                if (description != null) {
+                    announcement.setDescription(description);
+                }
+                if (sold != null && sold == true) {
+                    announcement.setSold(sold);
+                    announcement.setEndDate(new Date());
                 } else if (sold != null && sold == false) {
-                announcement.setSold(sold);
-                announcement.setEndDate(null);
+                    announcement.setSold(sold);
+                    announcement.setEndDate(null);
+                }
+                announcementService.update(announcement);
+                logger.info("UPDATE: update succsessfully: " + id);
+                return new ResponseEntity<>(converter.convertToDto(announcement, AnnouncementDto.class), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("UPDATE: This user can`t change this announcement", HttpStatus.OK);
             }
-            announcementService.update(announcement);
-            responseEntity = new ResponseEntity<>(converter.convertToDto(announcement, AnnouncementDto.class), HttpStatus.OK);
-        } else {
-            responseEntity = new ResponseEntity<>("This user can`t change this announcement", HttpStatus.OK);
+        } catch (NoResultException e) {
+            logger.error("UPDATE: This Announcement doesn`t exist, ID Announcement: " + id);
+            return new ResponseEntity<>("UPDATE: This Announcement doesn`t exist, ID Announcement: " + id, HttpStatus.OK);
         }
-        return responseEntity;
     }
 
     @Secured("ROLE_USER")
@@ -175,7 +186,15 @@ public class AnnouncementController {
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
-        announcementService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        logger.info("DELETE: try to delete ID Announcement: " + id);
+        try {
+            announcementService.delete(id);
+            logger.info("Deleted successfully, ID Announcement: " + id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoResultException e) {
+            logger.error("This Announcement doesn`t exist, ID Announcement: " + id, e);
+            return new ResponseEntity<>("This Announcement doesn`t exist, ID Announcement: " + id, HttpStatus.OK);
+        }
     }
 }

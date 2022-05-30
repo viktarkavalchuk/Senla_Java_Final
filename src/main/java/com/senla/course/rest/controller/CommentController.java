@@ -54,17 +54,17 @@ public class CommentController {
 
     @GetMapping("/getCommentsByAnnouncement")
     public ResponseEntity<?> getCommentsByAnnouncement(@RequestParam(value = "announcement") Integer id) {
-
+        logger.info("GET: try to get CommentsByAnnouncement, ID Announcement: " + id);
         try {
             Announcement announcement = announcementService.getById(id);
             List<Comment> comments = commentService.getByAnnouncement(announcement);
-
+            logger.info("GET: get CommentsByAnnouncement succsessfully, ID Announcement: " + id);
             return new ResponseEntity<>(comments.stream().map(d -> converter.convertToDto(d, CommentDto.class))
                     .collect(Collectors.toList()),
                     HttpStatus.OK);
-        } catch(NoResultException e) {
-            logger.error("This announcement doesn`t exist, ID announcement: " + id);
-            return new ResponseEntity<>("This announcement doesn`t exist, ID announcement: " + id, HttpStatus.OK);
+        } catch (NoResultException e) {
+            logger.error("This Announcement doesn`t exist, ID Announcement: " + id);
+            return new ResponseEntity<>("This Announcement doesn`t exist, ID Announcement: " + id, HttpStatus.OK);
         }
     }
 
