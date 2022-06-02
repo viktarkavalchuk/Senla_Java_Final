@@ -6,12 +6,12 @@ import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.AnnouncementDto;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
@@ -23,11 +23,11 @@ import java.util.stream.Collectors;
 import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 
 
-@Controller
+@RestController
 @RequestMapping("/announcement")
 public class AnnouncementController {
 
-    private static final Logger logger = LogManager.getLogger(AnnouncementController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AnnouncementController.class);
     private final AnnouncementServiceImpl announcementService;
     private final UserServiceImpl userService;
     private final BasicConverter<Announcement, AnnouncementDto> converter;
@@ -191,7 +191,7 @@ public class AnnouncementController {
         try {
             announcementService.delete(id);
             logger.info("Deleted successfully, ID Announcement: " + id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>("Deleted successfully, ID Announcement: " + id, HttpStatus.OK);
         } catch (NoResultException e) {
             logger.error("This Announcement doesn`t exist, ID Announcement: " + id, e);
             return new ResponseEntity<>("This Announcement doesn`t exist, ID Announcement: " + id, HttpStatus.OK);

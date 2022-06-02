@@ -1,0 +1,19 @@
+2022-06-02 13:57:19,928 [main] 55   evel c.s.c.SwaggerSpringApp         Starting SwaggerSpringApp using Java 1.8.0_261 on DESKTOP-NC07JBO with PID 2972 (D:\Projects\Senla_Java_Final\target\classes started by Admin in D:\Projects\Senla_Java_Final) 
+2022-06-02 13:57:19,940 [main] 635  evel c.s.c.SwaggerSpringApp         No active profile set, falling back to default profiles: default 
+2022-06-02 13:57:21,332 [main] 132  evel o.s.d.r.c.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022-06-02 13:57:21,390 [main] 201  evel o.s.d.r.c.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 41 ms. Found 0 JPA repository interfaces. 
+2022-06-02 13:57:22,265 [main] 108  evel o.s.b.w.e.t.TomcatWebServer    Tomcat initialized with port(s): 8080 (http) 
+2022-06-02 13:57:22,284 [main] 173  evel o.a.c.h.Http11NioProtocol      Initializing ProtocolHandler ["http-nio-8080"] 
+2022-06-02 13:57:22,284 [main] 173  evel o.a.c.c.StandardService        Starting service [Tomcat] 
+2022-06-02 13:57:22,285 [main] 173  evel o.a.c.c.StandardEngine         Starting Servlet engine: [Apache Tomcat/9.0.55] 
+2022-06-02 13:57:22,391 [main] 173  evel o.a.c.c.C.[.[.[/]              Initializing Spring embedded WebApplicationContext 
+2022-06-02 13:57:22,392 [main] 290  evel o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 2300 ms 
+2022-06-02 13:57:24,475 [main] 437  evel o.s.o.j.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022-06-02 13:57:24,752 [main] 219  evel o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022-06-02 13:57:25,069 [main] 367  evel o.s.w.s.m.m.a.RequestMappingHandlerMapping 22 mappings in 'requestMappingHandlerMapping' 
+2022-06-02 13:57:25,244 [main] 625  evel o.s.w.s.m.m.a.RequestMappingHandlerAdapter ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice 
+2022-06-02 13:57:25,334 [main] 307  evel o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice 
+2022-06-02 13:57:25,587 [main] 51   evel o.s.s.w.DefaultSecurityFilterChain Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5e37fb82, org.springframework.security.web.context.SecurityContextPersistenceFilter@73aaec54, org.springframework.security.web.header.HeaderWriterFilter@b75b890, org.springframework.security.web.authentication.logout.LogoutFilter@4b4927e5, com.senla.course.security.config.JwtFilter@4f453e63, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@117b2cc6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e151e1f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59ec7020, org.springframework.security.web.session.SessionManagementFilter@6c6928c, org.springframework.security.web.access.ExceptionTranslationFilter@4416e18d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@56da96b3] 
+2022-06-02 13:57:25,886 [main] 173  evel o.a.c.h.Http11NioProtocol      Starting ProtocolHandler ["http-nio-8080"] 
+2022-06-02 13:57:25,913 [main] 220  evel o.s.b.w.e.t.TomcatWebServer    Tomcat started on port(s): 8080 (http) with context path '' 
+2022-06-02 13:57:25,930 [main] 61   evel c.s.c.SwaggerSpringApp         Started SwaggerSpringApp in 6.761 seconds (JVM running for 8.501) 

@@ -7,25 +7,22 @@ import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.ChatDto;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 
-@Controller
+@RestController
 @RequestMapping("/chat")
 public class ChatController {
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
     private final ChatServiceImpl chatService;
     private final UserServiceImpl userService;

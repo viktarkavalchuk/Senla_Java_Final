@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="info" strict="true"
-               name="XMLConfigTest" packages="org.apache.logging.log4j.test">
-    <Filter type="ThresholdFilter" level="INFO" />
-
+<Configuration>
     <Appenders>
-        <Console name="STDOUT">
-            <Layout type="PatternLayout" pattern="%m %n" />
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %-10logger{36} - %msg%n" />
         </Console>
-        <RollingFile name="rollingFile"
-                     fileName="src/main/resources/logback.log"
-                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+        <RollingFile name="File" fileName="src/main/resources/logback.txt" filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz" immediateFlush="true">
             <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval = "1" />
-                <SizeBasedTriggeringPolicy
-                        size="250 MB" />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
             </Policies>
         </RollingFile>
+<!--        <File name="File" fileName="src/main/resources/logback.txt">-->
+<!--            <PatternLayout pattern="%d [%t] %-5Level %-30c{1.} %msg %n" />-->
+<!--        </File>-->
     </Appenders>
 
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="STDOUT" />
-            <AppenderRef ref="rollingFile" />
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
         </Root>
     </Loggers>
-
 </Configuration>

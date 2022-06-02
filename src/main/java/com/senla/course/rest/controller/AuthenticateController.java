@@ -3,22 +3,23 @@ package com.senla.course.rest.controller;
 import com.senla.course.security.model.AuthRequest;
 import com.senla.course.security.utils.JwtUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/")
 public class AuthenticateController {
 
-    private static final Logger logger = LogManager.getLogger(AuthenticateController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticateController.class);
 
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;

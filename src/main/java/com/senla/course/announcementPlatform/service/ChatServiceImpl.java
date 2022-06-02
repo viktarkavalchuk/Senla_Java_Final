@@ -3,8 +3,6 @@ package com.senla.course.announcementPlatform.service;
 import com.senla.course.announcementPlatform.dao.ChatDao;
 import com.senla.course.announcementPlatform.model.Chat;
 import com.senla.course.announcementPlatform.service.interfaces.ChatService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

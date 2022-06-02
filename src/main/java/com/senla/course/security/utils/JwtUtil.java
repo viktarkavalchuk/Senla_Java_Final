@@ -14,14 +14,11 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
+    private String secret = "superSecret";
+    private Long timeToken = 6000000L;
+
     public JwtUtil() {
     }
-
-    public JwtUtil(String secret) {
-        this.secret = secret;
-    }
-
-    private String secret = "superSecret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -51,7 +48,7 @@ public class JwtUtil {
     private String createToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + timeToken))
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 

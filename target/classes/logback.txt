@@ -1,0 +1,191 @@
+2022-06-02 13:57:58,831 [main] 55   evel c.s.c.SwaggerSpringApp         Starting SwaggerSpringApp using Java 1.8.0_261 on DESKTOP-NC07JBO with PID 2860 (D:\Projects\Senla_Java_Final\target\classes started by Admin in D:\Projects\Senla_Java_Final) 
+2022-06-02 13:57:58,841 [main] 635  evel c.s.c.SwaggerSpringApp         No active profile set, falling back to default profiles: default 
+2022-06-02 13:57:59,748 [main] 132  evel o.s.d.r.c.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2022-06-02 13:57:59,776 [main] 201  evel o.s.d.r.c.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 17 ms. Found 0 JPA repository interfaces. 
+2022-06-02 13:58:00,468 [main] 108  evel o.s.b.w.e.t.TomcatWebServer    Tomcat initialized with port(s): 8080 (http) 
+2022-06-02 13:58:00,488 [main] 173  evel o.a.c.h.Http11NioProtocol      Initializing ProtocolHandler ["http-nio-8080"] 
+2022-06-02 13:58:00,489 [main] 173  evel o.a.c.c.StandardService        Starting service [Tomcat] 
+2022-06-02 13:58:00,489 [main] 173  evel o.a.c.c.StandardEngine         Starting Servlet engine: [Apache Tomcat/9.0.55] 
+2022-06-02 13:58:00,584 [main] 173  evel o.a.c.c.C.[.[.[/]              Initializing Spring embedded WebApplicationContext 
+2022-06-02 13:58:00,585 [main] 290  evel o.s.b.w.s.c.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1578 ms 
+2022-06-02 13:58:01,855 [main] 437  evel o.s.o.j.LocalContainerEntityManagerFactoryBean Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2022-06-02 13:58:01,937 [main] 219  evel o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2022-06-02 13:58:02,033 [main] 367  evel o.s.w.s.m.m.a.RequestMappingHandlerMapping 22 mappings in 'requestMappingHandlerMapping' 
+2022-06-02 13:58:02,087 [main] 625  evel o.s.w.s.m.m.a.RequestMappingHandlerAdapter ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice 
+2022-06-02 13:58:02,120 [main] 307  evel o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice 
+2022-06-02 13:58:02,265 [main] 51   evel o.s.s.w.DefaultSecurityFilterChain Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5e37fb82, org.springframework.security.web.context.SecurityContextPersistenceFilter@73aaec54, org.springframework.security.web.header.HeaderWriterFilter@b75b890, org.springframework.security.web.authentication.logout.LogoutFilter@4b4927e5, com.senla.course.security.config.JwtFilter@4f453e63, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@117b2cc6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e151e1f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59ec7020, org.springframework.security.web.session.SessionManagementFilter@6c6928c, org.springframework.security.web.access.ExceptionTranslationFilter@4416e18d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@56da96b3] 
+2022-06-02 13:58:02,515 [main] 173  evel o.a.c.h.Http11NioProtocol      Starting ProtocolHandler ["http-nio-8080"] 
+2022-06-02 13:58:02,532 [main] 220  evel o.s.b.w.e.t.TomcatWebServer    Tomcat started on port(s): 8080 (http) with context path '' 
+2022-06-02 13:58:02,545 [main] 61   evel c.s.c.SwaggerSpringApp         Started SwaggerSpringApp in 4.281 seconds (JVM running for 5.751) 
+2022-06-02 13:59:39.702 [main] INFO  com.senla.course.SwaggerSpringApp - Starting SwaggerSpringApp using Java 1.8.0_261 on DESKTOP-NC07JBO with PID 2008 (D:\Projects\Senla_Java_Final\target\classes started by Admin in D:\Projects\Senla_Java_Final)
+2022-06-02 13:59:39.716 [main] INFO  com.senla.course.SwaggerSpringApp - No active profile set, falling back to default profiles: default
+2022-06-02 13:59:40.626 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-02 13:59:40.663 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 24 ms. Found 0 JPA repository interfaces.
+2022-06-02 13:59:41.196 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-06-02 13:59:41.204 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-06-02 13:59:41.204 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-06-02 13:59:41.204 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-06-02 13:59:41.296 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-06-02 13:59:41.297 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1433 ms
+2022-06-02 13:59:42.481 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-02 13:59:42.572 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-02 13:59:42.681 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 22 mappings in 'requestMappingHandlerMapping'
+2022-06-02 13:59:42.746 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-06-02 13:59:42.780 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-06-02 13:59:42.913 [main] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@fe42a09, org.springframework.security.web.context.SecurityContextPersistenceFilter@7ad889be, org.springframework.security.web.header.HeaderWriterFilter@3d4ecc67, org.springframework.security.web.authentication.logout.LogoutFilter@69eb544f, com.senla.course.security.config.JwtFilter@263bbfeb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@63de4fa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6d7740f0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5458c71e, org.springframework.security.web.session.SessionManagementFilter@5b322873, org.springframework.security.web.access.ExceptionTranslationFilter@33751d49, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2de3b052]
+2022-06-02 13:59:43.128 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-06-02 13:59:43.147 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-02 13:59:43.160 [main] INFO  com.senla.course.SwaggerSpringApp - Started SwaggerSpringApp in 4.007 seconds (JVM running for 4.964)
+2022-06-02 14:00:58.673 [main] INFO  com.senla.course.SwaggerSpringApp - Starting SwaggerSpringApp using Java 1.8.0_261 on DESKTOP-NC07JBO with PID 10652 (D:\Projects\Senla_Java_Final\target\classes started by Admin in D:\Projects\Senla_Java_Final)
+2022-06-02 14:00:58.680 [main] INFO  com.senla.course.SwaggerSpringApp - No active profile set, falling back to default profiles: default
+2022-06-02 14:00:59.444 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-02 14:00:59.480 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 0 JPA repository interfaces.
+2022-06-02 14:01:00.003 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-06-02 14:01:00.014 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-06-02 14:01:00.015 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-06-02 14:01:00.015 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-06-02 14:01:00.113 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-06-02 14:01:00.113 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1351 ms
+2022-06-02 14:01:01.321 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-02 14:01:01.452 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-02 14:01:01.543 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 22 mappings in 'requestMappingHandlerMapping'
+2022-06-02 14:01:01.594 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-06-02 14:01:01.616 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-06-02 14:01:01.729 [main] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ffd0114, org.springframework.security.web.context.SecurityContextPersistenceFilter@63de4fa, org.springframework.security.web.header.HeaderWriterFilter@7606bd03, org.springframework.security.web.authentication.logout.LogoutFilter@b5c902, com.senla.course.security.config.JwtFilter@67d86804, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@18907af2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1de7f898, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b3857e2, org.springframework.security.web.session.SessionManagementFilter@7ad889be, org.springframework.security.web.access.ExceptionTranslationFilter@4eeb14e0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@16bbaab3]
+2022-06-02 14:01:01.954 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-06-02 14:01:01.970 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-02 14:01:01.980 [main] INFO  com.senla.course.SwaggerSpringApp - Started SwaggerSpringApp in 3.742 seconds (JVM running for 4.679)
+2022-06-02 14:01:17.692 [main] INFO  com.senla.course.SwaggerSpringApp - Starting SwaggerSpringApp using Java 1.8.0_261 on DESKTOP-NC07JBO with PID 13940 (D:\Projects\Senla_Java_Final\target\classes started by Admin in D:\Projects\Senla_Java_Final)
+2022-06-02 14:01:17.702 [main] INFO  com.senla.course.SwaggerSpringApp - No active profile set, falling back to default profiles: default
+2022-06-02 14:01:18.403 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-02 14:01:18.430 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 JPA repository interfaces.
+2022-06-02 14:01:18.900 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-06-02 14:01:18.906 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2022-06-02 14:01:18.907 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-06-02 14:01:18.907 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-06-02 14:01:18.992 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-06-02 14:01:18.992 [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1206 ms
+2022-06-02 14:01:20.069 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-02 14:01:20.162 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-06-02 14:01:20.249 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 22 mappings in 'requestMappingHandlerMapping'
+2022-06-02 14:01:20.298 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-06-02 14:01:20.322 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-06-02 14:01:20.439 [main] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f3c8b60, org.springframework.security.web.context.SecurityContextPersistenceFilter@537ca28e, org.springframework.security.web.header.HeaderWriterFilter@516195cf, org.springframework.security.web.authentication.logout.LogoutFilter@1d283d1, com.senla.course.security.config.JwtFilter@4da9f723, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35e2b89f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@658e7ead, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16bbaab3, org.springframework.security.web.session.SessionManagementFilter@70d3cdbf, org.springframework.security.web.access.ExceptionTranslationFilter@71b26880, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2120bed]
+2022-06-02 14:01:20.637 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2022-06-02 14:01:20.651 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-06-02 14:01:20.662 [main] INFO  com.senla.course.SwaggerSpringApp - Started SwaggerSpringApp in 3.446 seconds (JVM running for 4.445)
+2022-06-02 14:01:39.077 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-06-02 14:01:39.077 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-06-02 14:01:39.077 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2022-06-02 14:01:39.077 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2022-06-02 14:01:39.077 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2022-06-02 14:01:39.078 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3ec9f8d
+2022-06-02 14:01:39.078 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@7d47dfed
+2022-06-02 14:01:39.078 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-06-02 14:01:39.078 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2022-06-02 14:01:40.076 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - DELETE "/announcement/3", parameters={}
+2022-06-02 14:01:40.081 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to com.senla.course.rest.controller.AnnouncementController#delete(int)
+2022-06-02 14:01:40.114 [http-nio-8080-exec-1] INFO  com.senla.course.rest.controller.AnnouncementController - DELETE: try to delete ID Announcement: 3
+2022-06-02 14:01:40.126 [http-nio-8080-exec-1] ERROR com.senla.course.rest.controller.AnnouncementController - This Announcement doesn`t exist, ID Announcement: 3
+javax.persistence.NoResultException: No entity found for query
+	at org.hibernate.query.internal.AbstractProducedQuery.getSingleResult(AbstractProducedQuery.java:1667) ~[hibernate-core-5.6.1.Final.jar:5.6.1.Final]
+	at com.senla.course.announcementPlatform.dao.AnnouncementDao.getById(AnnouncementDao.java:35) ~[classes/:?]
+	at com.senla.course.announcementPlatform.service.AnnouncementServiceImpl.getById(AnnouncementServiceImpl.java:36) ~[classes/:?]
+	at com.senla.course.announcementPlatform.service.AnnouncementServiceImpl.delete(AnnouncementServiceImpl.java:26) ~[classes/:?]
+	at com.senla.course.rest.controller.AnnouncementController.delete(AnnouncementController.java:192) [classes/:?]
+	at com.senla.course.rest.controller.AnnouncementController$$FastClassBySpringCGLIB$$ec297c44.invoke(<generated>) [classes/:?]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) [spring-core-5.3.13.jar:5.3.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783) [spring-aop-5.3.13.jar:5.3.13]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) [spring-aop-5.3.13.jar:5.3.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753) [spring-aop-5.3.13.jar:5.3.13]
+	at org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor.invoke(MethodSecurityInterceptor.java:61) [spring-security-core-5.6.0.jar:5.6.0]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) [spring-aop-5.3.13.jar:5.3.13]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753) [spring-aop-5.3.13.jar:5.3.13]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698) [spring-aop-5.3.13.jar:5.3.13]
+	at com.senla.course.rest.controller.AnnouncementController$$EnhancerBySpringCGLIB$$7b7bf044.delete(<generated>) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_261]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_261]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_261]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_261]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) [spring-webmvc-5.3.13.jar:5.3.13]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:931) [spring-webmvc-5.3.13.jar:5.3.13]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687) [tomcat-embed-core-9.0.55.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) [spring-webmvc-5.3.13.jar:5.3.13]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) [tomcat-embed-core-9.0.55.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113) [spring-web-5.3.13.jar:5.3.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at com.senla.course.security.config.JwtFilter.doFilterInternal(JwtFilter.java:57) [classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) [spring-security-web-5.6.0.jar:5.6.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271) [spring-web-5.3.13.jar:5.3.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.13.jar:5.3.13]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119) [spring-web-5.3.13.jar:5.3.13]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.55.jar:9.0.55]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_261]
+2022-06-02 14:01:40.142 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json]
+2022-06-02 14:01:40.143 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor - Writing ["This Announcement doesn`t exist, ID Announcement: 3"]
+2022-06-02 14:01:40.148 [http-nio-8080-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
