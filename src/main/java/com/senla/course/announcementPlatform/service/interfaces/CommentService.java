@@ -9,11 +9,15 @@ import java.util.List;
 @Service
 public interface CommentService {
     void create(Comment comment);
+
     void delete(Integer id);
+
     void update(Comment comment);
+
     Comment getById(Integer id);
 
     List<Comment> getByAnnouncement(Announcement announcement);
+
     List<Comment> getAll();
 
 }

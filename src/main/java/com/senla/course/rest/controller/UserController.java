@@ -7,7 +7,6 @@ import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.UserDto;
 import com.senla.course.security.dao.RoleDao;
 import com.senla.course.security.model.Role;
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

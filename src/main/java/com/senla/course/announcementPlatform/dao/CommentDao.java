@@ -23,7 +23,7 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Comment> comments = (List<Comment>)session.createQuery("From Comment").list();
+        List<Comment> comments = (List<Comment>) session.createQuery("From Comment").list();
         session.close();
         return comments;
     }
@@ -50,7 +50,7 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
     public void update(Comment entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.update(entity);
             tx.commit();
@@ -62,12 +62,11 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
     }
 
 
-
     @Override
     public void delete(Comment entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.delete(entity);
             tx.commit();
@@ -82,7 +81,7 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
     public void create(Comment entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(entity);
             tx.commit();
@@ -90,8 +89,7 @@ public class CommentDao extends HibernateAbstractDao<Comment> {
         } catch (Exception e) {
             tx.rollback();
             logger.error("Creation error" + e);
-        }
-        finally {
+        } finally {
             session.close();
         }
     }

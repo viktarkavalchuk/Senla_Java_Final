@@ -8,6 +8,12 @@ import java.util.Comparator;
 @Table(name = "chat", schema = "private_announcements")
 public class Chat implements Serializable {
 
+    public static final Comparator<Chat> COMPARE_BY_ID = new Comparator<Chat>() {
+        @Override
+        public int compare(Chat lhs, Chat rhs) {
+            return (int) (lhs.getId() - rhs.getId());
+        }
+    };
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idChat")
@@ -52,11 +58,4 @@ public class Chat implements Serializable {
     public void setChatRecipient(User chatRecipient) {
         this.chatRecipient = chatRecipient;
     }
-
-    public static final Comparator<Chat> COMPARE_BY_ID = new Comparator<Chat>() {
-        @Override
-        public int compare(Chat lhs, Chat rhs) {
-            return (int) (lhs.getId() - rhs.getId());
-        }
-    };
 }

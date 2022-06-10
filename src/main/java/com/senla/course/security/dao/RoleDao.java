@@ -14,7 +14,7 @@ public class RoleDao {
 
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Role> roles = (List<Role>)session.createQuery("From Role ").list();
+        List<Role> roles = (List<Role>) session.createQuery("From Role ").list();
         session.close();
         return roles;
     }

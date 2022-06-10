@@ -24,7 +24,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public void delete(Integer id) {
-            chatDao.delete(getById(id));
+        chatDao.delete(getById(id));
     }
 
     @Override

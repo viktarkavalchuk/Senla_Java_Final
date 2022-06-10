@@ -22,7 +22,7 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Announcement> announcements = (List<Announcement>)session.createQuery("From Announcement ").list();
+        List<Announcement> announcements = (List<Announcement>) session.createQuery("From Announcement ").list();
         session.close();
         return announcements;
     }
@@ -41,7 +41,7 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     public void update(Announcement entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.update(entity);
             tx.commit();
@@ -56,7 +56,7 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     public void delete(Announcement entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.delete(entity);
             tx.commit();
@@ -71,7 +71,7 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
     public void create(Announcement entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(entity);
             tx.commit();
@@ -79,24 +79,26 @@ public class AnnouncementDao extends HibernateAbstractDao<Announcement> {
         } catch (Exception e) {
             tx.rollback();
             logger.error("Creation error" + e);
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
+
     public List<Announcement> getVipAnnouncements() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = true and sold = false").list();
         session.close();
         return announcement;
     }
+
     public List<Announcement> getNotVipAnnouncements() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Announcement> announcement = (List<Announcement>) session.createQuery("from Announcement where vip = false and sold = false").list();
         session.close();
         return announcement;
     }
-    public List<Announcement> getClosedAnnouncements(){
+
+    public List<Announcement> getClosedAnnouncements() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Announcement> announcement = session.createQuery("from Announcement where sold = true").list();
         session.close();

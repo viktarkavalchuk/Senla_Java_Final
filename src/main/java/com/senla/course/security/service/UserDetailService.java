@@ -39,7 +39,7 @@ public class UserDetailService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         Set<Role> roles = user.getRoles();
         Set<GrantedAuthority> grantedAuthorityRoles = new HashSet<GrantedAuthority>();
-        for (Role role: roles) {
+        for (Role role : roles) {
             grantedAuthorityRoles.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(grantedAuthorityRoles);

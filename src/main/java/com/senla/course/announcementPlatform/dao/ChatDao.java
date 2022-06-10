@@ -22,7 +22,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Chat> chats = (List<Chat>)session.createQuery("From Chat ").list();
+        List<Chat> chats = (List<Chat>) session.createQuery("From Chat ").list();
         session.close();
         return chats;
     }
@@ -41,7 +41,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
     public void update(Chat entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.update(entity);
             tx.commit();
@@ -56,7 +56,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
     public void delete(Chat entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.delete(entity);
             tx.commit();
@@ -71,7 +71,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
     public void create(Chat entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(entity);
             tx.commit();
@@ -79,8 +79,7 @@ public class ChatDao extends HibernateAbstractDao<Chat> {
         } catch (Exception e) {
             tx.rollback();
             logger.error("Creation error" + e);
-        }
-        finally {
+        } finally {
             session.close();
         }
     }

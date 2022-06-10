@@ -6,7 +6,6 @@ import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.AnnouncementDto;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -39,17 +39,18 @@ public class AnnouncementController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAnnouncement(){
+    public ResponseEntity<?> getAnnouncement() {
         List<Announcement> vip = announcementService.getVip();
         List<Announcement> notVip = announcementService.getNotVip();
         Collections.sort(vip, Announcement.COMPARE_BY_RATING.reversed());
         Collections.sort(notVip, Announcement.COMPARE_BY_RATING.reversed());
         vip.addAll(notVip);
 
-        return new ResponseEntity<>(
-                vip.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class))
-                .collect(Collectors.toList()),
-                HttpStatus.OK);
+        List<AnnouncementDto> dto = vip.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class))
+                .collect(Collectors.toList());
+
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/getByName")
@@ -66,7 +67,7 @@ public class AnnouncementController {
     public ResponseEntity<?> getAnnouncementByNameAndPrice(@RequestParam String name, Integer price) {
         List<Announcement> getByNameAndPrice = announcementService.getAll()
                 .stream().filter(x -> x.getName().equalsIgnoreCase(name))
-                .filter(x->x.getPrice()<price)
+                .filter(x -> x.getPrice() < price)
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(getByNameAndPrice.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class))
@@ -109,9 +110,9 @@ public class AnnouncementController {
     @Secured("ROLE_ADMIN")
     @PatchMapping("/vip/{id}")
     public ResponseEntity<?> setVip(@PathVariable("id") int id,
-                         @RequestParam(value = "vip") Boolean vip) {
+                                    @RequestParam(value = "vip") Boolean vip) {
         logger.info("UPDATE: try to update ID Announcement: " + id);
-        try{
+        try {
             Announcement announcement = announcementService.getById(id);
             announcement.setVip(vip);
             announcementService.update(announcement);
@@ -126,10 +127,10 @@ public class AnnouncementController {
     @Secured("ROLE_USER")
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateAnnouncement(@PathVariable("id") int id,
-                         @RequestParam(value = "name", required = false) String name,
-                         @RequestParam(value = "price", required = false) Integer price,
-                         @RequestParam(value = "description", required = false) String description,
-                         @RequestParam(value = "sold", required = false) Boolean sold){
+                                                @RequestParam(value = "name", required = false) String name,
+                                                @RequestParam(value = "price", required = false) Integer price,
+                                                @RequestParam(value = "description", required = false) String description,
+                                                @RequestParam(value = "sold", required = false) Boolean sold) {
 
         logger.info("UPDATE: try to update ID Announcement: " + id);
         try {
@@ -164,9 +165,9 @@ public class AnnouncementController {
 
     @Secured("ROLE_USER")
     @PostMapping
-    public ResponseEntity<?> createAnnouncement(@RequestParam(value = "name", required = false) String name,
-                                     @RequestParam(value = "price", required = false) Integer price,
-                                     @RequestParam(value = "description", required = false) String description){
+    public ResponseEntity<?> createAnnouncement(@RequestParam(value = "name") String name,
+                                                @RequestParam(value = "price") Integer price,
+                                                @RequestParam(value = "description", required = false) String description) {
 
         Announcement announcement = new Announcement();
         User user = userService.getById(idUserLogin);
@@ -191,10 +192,9 @@ public class AnnouncementController {
         try {
             announcementService.delete(id);
             logger.info("Deleted successfully, ID Announcement: " + id);
-            return new ResponseEntity<>("Deleted successfully, ID Announcement: " + id, HttpStatus.OK);
         } catch (NoResultException e) {
             logger.error("This Announcement doesn`t exist, ID Announcement: " + id, e);
-            return new ResponseEntity<>("This Announcement doesn`t exist, ID Announcement: " + id, HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

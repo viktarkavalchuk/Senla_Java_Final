@@ -6,7 +6,6 @@ import com.senla.course.announcementPlatform.service.ChatServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.ChatDto;
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -35,7 +34,7 @@ public class ChatController {
     }
 
     @GetMapping("/getMessage")
-    public ResponseEntity<?> getAll(@RequestParam(value = "Recipient") String recipient){
+    public ResponseEntity<?> getAll(@RequestParam(value = "Recipient") String recipient) {
         User user = userService.getById(idUserLogin);
         List<Chat> chats = chatService.getChatByUser(user.getLogin(), recipient);
 
@@ -47,7 +46,7 @@ public class ChatController {
     @Secured("ROLE_USER")
     @PostMapping
     public ResponseEntity<?> createChatMessage(@RequestParam(value = "recipient") String recipient,
-                                               @RequestParam(value = "message") String message){
+                                               @RequestParam(value = "message") String message) {
 
         User user = userService.getById(idUserLogin);
         Chat chat = new Chat();

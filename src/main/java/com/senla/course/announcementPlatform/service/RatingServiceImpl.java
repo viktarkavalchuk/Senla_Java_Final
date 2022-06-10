@@ -6,6 +6,7 @@ import com.senla.course.announcementPlatform.service.interfaces.RatingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class RatingServiceImpl implements RatingService {
 
@@ -22,7 +23,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void delete(Integer id) {
-            ratingDao.delete(getById(id));
+        ratingDao.delete(getById(id));
     }
 
     @Override

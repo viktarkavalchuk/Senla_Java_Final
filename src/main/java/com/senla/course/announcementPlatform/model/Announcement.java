@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "announcement", schema = "private_announcements")
 public class Announcement implements Serializable {
+    public static final Comparator<Announcement> COMPARE_BY_RATING = new Comparator<Announcement>() {
+        @Override
+        public int compare(Announcement lhs, Announcement rhs) {
+            return (int) (lhs.getRating() * 10 - rhs.getRating() * 10);
+        }
+    };
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Announcement")
@@ -33,7 +39,7 @@ public class Announcement implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(targetEntity = Comment.class, mappedBy = "announcement", fetch=FetchType.EAGER)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "announcement", fetch = FetchType.EAGER)
     private List<Comment> comments;
     @Column(name = "rating_user")
     private Double rating;
@@ -131,12 +137,5 @@ public class Announcement implements Serializable {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-
-    public static final Comparator<Announcement> COMPARE_BY_RATING = new Comparator<Announcement>() {
-        @Override
-        public int compare(Announcement lhs, Announcement rhs) {
-            return (int) (lhs.getRating()*10 - rhs.getRating()*10);
-        }
-    };
 }
 

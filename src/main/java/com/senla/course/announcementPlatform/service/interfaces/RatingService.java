@@ -9,8 +9,11 @@ import java.util.List;
 public interface RatingService {
 
     void create(Rating rating);
+
     void delete(Integer id);
+
     void update(Rating rating);
+
     Rating getById(Integer id);
 
     List<Rating> getAll();

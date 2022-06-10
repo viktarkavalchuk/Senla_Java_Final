@@ -8,12 +8,18 @@ import java.util.List;
 @Service
 public interface AnnouncementService {
     void create(Announcement announcement);
+
     void delete(Integer id);
+
     void update(Announcement announcement);
+
     Announcement getById(Integer id);
 
     List<Announcement> getAll();
+
     List<Announcement> getVip();
+
     List<Announcement> getNotVip();
+
     List<Announcement> getClosedAnnouncements();
 }

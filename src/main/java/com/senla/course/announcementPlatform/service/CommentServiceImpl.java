@@ -7,6 +7,7 @@ import com.senla.course.announcementPlatform.service.interfaces.CommentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -23,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(Integer id) {
-            commentDao.delete(getById(id));
+        commentDao.delete(getById(id));
     }
 
     @Override

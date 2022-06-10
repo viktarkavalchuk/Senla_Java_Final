@@ -19,6 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserDetailService userDetailsService;
+    private final JwtFilter jwtFilter;
+
     public SecurityConfig(UserDetailService userDetailsService, JwtFilter jwtFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtFilter = jwtFilter;
@@ -28,9 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-
-    private final UserDetailService userDetailsService;
-    private final JwtFilter jwtFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

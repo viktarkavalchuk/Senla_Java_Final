@@ -23,7 +23,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public void delete(Integer id) {
-            announcementDao.delete(getById(id));
+        announcementDao.delete(getById(id));
     }
 
     @Override

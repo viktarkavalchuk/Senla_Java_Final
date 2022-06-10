@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 public class UserDao extends HibernateAbstractDao<User> {
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(UserDao.class);
 
     public UserDao() {
     }
@@ -21,7 +21,7 @@ public class UserDao extends HibernateAbstractDao<User> {
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<User> users = (List<User>)session.createQuery("From User").list();
+        List<User> users = (List<User>) session.createQuery("From User").list();
         session.close();
         return users;
     }
@@ -40,7 +40,7 @@ public class UserDao extends HibernateAbstractDao<User> {
     public void update(User entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.update(entity);
             tx.commit();
@@ -55,7 +55,7 @@ public class UserDao extends HibernateAbstractDao<User> {
     public void delete(User entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.delete(entity);
             tx.commit();
@@ -70,7 +70,7 @@ public class UserDao extends HibernateAbstractDao<User> {
     public void create(User entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(entity);
             tx.commit();
@@ -78,13 +78,12 @@ public class UserDao extends HibernateAbstractDao<User> {
         } catch (Exception e) {
             tx.rollback();
             logger.error("Creation error" + e);
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
 
-    public User getByLogin(String login){
+    public User getByLogin(String login) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from User where login = :paramName");
         query.setParameter("paramName", login);

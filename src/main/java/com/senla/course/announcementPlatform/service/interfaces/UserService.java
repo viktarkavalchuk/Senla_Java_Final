@@ -9,10 +9,15 @@ import java.util.List;
 public interface UserService {
 
     void create(User user);
+
     void delete(Integer id);
+
     void update(User user);
+
     User getById(Integer id);
+
     User getByLogin(String login);
+
     List<User> getAll();
 
 

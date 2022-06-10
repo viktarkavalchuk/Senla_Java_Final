@@ -21,7 +21,7 @@ public class User implements Serializable {
     private String email;
     @Column(name = "telephone_Number")
     private String telephoneNumber;
-    @OneToMany(targetEntity = Announcement.class, mappedBy = "user", fetch=FetchType.EAGER)
+    @OneToMany(targetEntity = Announcement.class, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Announcement> announcements;
 
     @OneToMany(targetEntity = Rating.class,
@@ -51,6 +51,22 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "role"))
     private Set<Role> roles;
+
+    public User() {
+    }
+
+    public User(String login, String password, Set<Role> roles) {
+        this.login = login;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(String userName, String email, String telephoneNumber, String login) {
+        this.userName = userName;
+        this.email = email;
+        this.telephoneNumber = telephoneNumber;
+        this.login = login;
+    }
 
     public int getId() {
         return id;

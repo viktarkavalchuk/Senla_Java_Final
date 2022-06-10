@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Query;
 import java.util.List;
+
 @Component
 public class RatingDao extends HibernateAbstractDao<Rating> {
     private static final Logger logger = LogManager.getLogger();
@@ -20,7 +21,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
     @Override
     public List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Rating> ratings = (List<Rating>)session.createQuery("From Rating").list();
+        List<Rating> ratings = (List<Rating>) session.createQuery("From Rating").list();
         session.close();
         return ratings;
     }
@@ -39,7 +40,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
     public void update(Rating entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.update(entity);
             tx.commit();
@@ -54,7 +55,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
     public void delete(Rating entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.delete(entity);
             tx.commit();
@@ -69,7 +70,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
     public void create(Rating entity) {
         Transaction tx = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
+        try {
             tx = session.beginTransaction();
             session.save(entity);
             tx.commit();
@@ -77,8 +78,7 @@ public class RatingDao extends HibernateAbstractDao<Rating> {
         } catch (Exception e) {
             tx.rollback();
             logger.error("Creation error" + e);
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
