@@ -108,5 +108,6 @@ modules.xml
 *.tar.gz
 *.rar
 
-target/
-logs/
+target/**
+**/logs
+logback.txt
