@@ -107,3 +107,6 @@ modules.xml
 *.zip
 *.tar.gz
 *.rar
+
+target/
+logs/
