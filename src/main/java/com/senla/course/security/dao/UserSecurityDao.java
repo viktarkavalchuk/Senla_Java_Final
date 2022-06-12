@@ -17,7 +17,6 @@ import java.util.List;
 public class UserSecurityDao {
 
     private static final Logger logger = LogManager.getLogger();
-    public static Integer idUserLogin;
     private final JdbcTemplate jdbcTemplate;
 
     public UserSecurityDao(JdbcTemplate jdbcTemplate) {
@@ -37,7 +36,6 @@ public class UserSecurityDao {
         for (User user : users) {
             if (user.getLogin().equalsIgnoreCase(userName)) {
                 id = user.getId();
-                idUserLogin = (id);
                 break;
             }
         }

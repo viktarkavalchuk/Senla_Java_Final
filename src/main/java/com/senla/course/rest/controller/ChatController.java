@@ -10,17 +10,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
-
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
+
     private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
     private final ChatServiceImpl chatService;
@@ -33,24 +33,27 @@ public class ChatController {
         this.converter = converter;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/getMessage")
     public ResponseEntity<?> getAll(@RequestParam(value = "Recipient") String recipient) {
-        User user = userService.getById(idUserLogin);
-        List<Chat> chats = chatService.getChatByUser(user.getLogin(), recipient);
+
+        User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        List<Chat> chats = chatService.getChatByUser(userRequest.getLogin(), recipient);
 
         return new ResponseEntity<>(chats.stream().map(d -> converter.convertToDto(d, ChatDto.class))
                 .collect(Collectors.toList()),
                 HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createChatMessage(@RequestParam(value = "recipient") String recipient,
                                                @RequestParam(value = "message") String message) {
 
-        User user = userService.getById(idUserLogin);
+        User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         Chat chat = new Chat();
-        chat.setChatSender(user);
+        chat.setChatSender(userRequest);
         chat.setChatRecipient(userService.getByLogin(recipient));
         chat.setMessage(message);
         chatService.create(chat);

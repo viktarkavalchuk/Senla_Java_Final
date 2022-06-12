@@ -12,14 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 
 @RestController
 @RequestMapping("/comment")
@@ -64,14 +63,14 @@ public class CommentController {
         }
     }
 
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createComment(@RequestParam(value = "announcementId") Integer id,
                                            @RequestParam(value = "bodyComment") String bodyComment) {
 
-        User user = userService.getById(idUserLogin);
+        User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         Comment comment = new Comment();
-        comment.setUserSender(user);
+        comment.setUserSender(userRequest);
         comment.setAnnouncement(announcementService.getById(id));
         comment.setBodyComment(bodyComment);
 

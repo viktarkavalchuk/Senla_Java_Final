@@ -11,7 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
 
 @RestController
 @RequestMapping("/user")
@@ -43,7 +42,7 @@ public class UserController {
         this.converter = converter;
     }
 
-    @Secured(("ROLE_ADMIN"))
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllUsers")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userService.getAll();
@@ -52,7 +51,7 @@ public class UserController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<?> registration(@RequestParam("name") String name,
                                           @RequestParam("email") String email,
@@ -80,40 +79,42 @@ public class UserController {
         return new ResponseEntity<>(converter.convertToDto(user, UserDto.class), HttpStatus.OK);
     }
 
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PatchMapping
     public ResponseEntity<?> update(@RequestParam(value = "name", required = false) String name,
                                     @RequestParam(value = "email", required = false) String email,
                                     @RequestParam(value = "telephone_Number", required = false) String telephoneNumber,
                                     @RequestParam(value = "login", required = false) String login,
                                     @RequestParam(value = "password", required = false) String password) {
-        User user = userService.getById(idUserLogin);
-        if (user != null) {
+
+        User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        if (userRequest != null) {
             if (name != null) {
-                user.setUserName(name);
+                userRequest.setUserName(name);
             }
             if (email != null) {
-                user.setEmail(email);
+                userRequest.setEmail(email);
             }
             if (telephoneNumber != null) {
-                user.setTelephoneNumber(telephoneNumber);
+                userRequest.setTelephoneNumber(telephoneNumber);
             }
             if (login != null) {
-                user.setLogin(login);
+                userRequest.setLogin(login);
             }
             if (password != null) {
-                user.setPassword(encoder.encode(password));
+                userRequest.setPassword(encoder.encode(password));
             }
-            userService.update(user);
-            logger.info("User updated successfully, id User: " + idUserLogin);
-            return new ResponseEntity<>(converter.convertToDto(user, UserDto.class), HttpStatus.OK);
+            userService.update(userRequest);
+            logger.info("User updated successfully, id User: " + userRequest);
+            return new ResponseEntity<>(converter.convertToDto(userRequest, UserDto.class), HttpStatus.OK);
         } else {
-            logger.error("User update error, id user does not exist: " + idUserLogin);
-            return new ResponseEntity<>("User update error id, user: " + idUserLogin, HttpStatus.OK);
+            logger.error("User update error, id user does not exist: " + userRequest);
+            return new ResponseEntity<>("User update error id, user: " + userRequest, HttpStatus.OK);
         }
     }
 
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) throws NoResultException {
 

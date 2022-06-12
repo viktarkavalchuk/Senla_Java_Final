@@ -8,29 +8,30 @@ import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.AnnouncementDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.senla.course.security.dao.UserSecurityDao.idUserLogin;
-
 
 @RestController
-@RequestMapping("/announcement")
+@RequestMapping(value = "/announcement", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AnnouncementController {
 
     private static final Logger logger = LoggerFactory.getLogger(AnnouncementController.class);
     private final AnnouncementServiceImpl announcementService;
     private final UserServiceImpl userService;
     private final BasicConverter<Announcement, AnnouncementDto> converter;
+    final HttpHeaders httpHeaders= new HttpHeaders();
 
     public AnnouncementController(AnnouncementServiceImpl announcementService, UserServiceImpl userService, BasicConverter<Announcement, AnnouncementDto> converter) {
         this.announcementService = announcementService;
@@ -46,11 +47,7 @@ public class AnnouncementController {
         Collections.sort(notVip, Announcement.COMPARE_BY_RATING.reversed());
         vip.addAll(notVip);
 
-        List<AnnouncementDto> dto = vip.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class))
-                .collect(Collectors.toList());
-
-
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(vip.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class)), HttpStatus.OK);
     }
 
     @GetMapping("/getByName")
@@ -107,7 +104,7 @@ public class AnnouncementController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/vip/{id}")
     public ResponseEntity<?> setVip(@PathVariable("id") int id,
                                     @RequestParam(value = "vip") Boolean vip) {
@@ -124,7 +121,7 @@ public class AnnouncementController {
         }
     }
 
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateAnnouncement(@PathVariable("id") int id,
                                                 @RequestParam(value = "name", required = false) String name,
@@ -134,10 +131,10 @@ public class AnnouncementController {
 
         logger.info("UPDATE: try to update ID Announcement: " + id);
         try {
-            User user = userService.getById(idUserLogin);
+            User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
             Announcement announcement = announcementService.getById(id);
 
-            if (announcement.getUser().getLogin().equalsIgnoreCase(user.getLogin())) {
+            if (announcement.getUser().getLogin().equalsIgnoreCase(userRequest.getLogin())) {
                 if (name != null) {
                     announcement.setName(name);
                 }
@@ -163,19 +160,19 @@ public class AnnouncementController {
         }
     }
 
-    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createAnnouncement(@RequestParam(value = "name") String name,
                                                 @RequestParam(value = "price") Integer price,
                                                 @RequestParam(value = "description", required = false) String description) {
 
         Announcement announcement = new Announcement();
-        User user = userService.getById(idUserLogin);
+        User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         announcement.setName(name);
         announcement.setPrice(price);
         announcement.setStartDate(new Date());
         announcement.setDescription(description);
-        announcement.setUser(user);
+        announcement.setUser(userRequest);
         announcement.setVip(false);
         announcement.setRating(5.0);
 
@@ -184,7 +181,7 @@ public class AnnouncementController {
         return new ResponseEntity<>(converter.convertToDto(announcement, AnnouncementDto.class), HttpStatus.OK);
     }
 
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
 
