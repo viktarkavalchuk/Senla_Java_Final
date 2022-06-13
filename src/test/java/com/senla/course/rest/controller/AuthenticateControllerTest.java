@@ -1,57 +1,53 @@
 package com.senla.course.rest.controller;
 
-import com.senla.course.security.utils.JwtUtil;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.senla.course.announcementPlatform.model.Announcement;
+import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
+import com.senla.course.rest.builder.AnnouncementBuilder;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@AutoConfigureMockMvc
-@SpringBootTest(classes = {})
-class AuthenticateControllerTest {
+@WebAppConfiguration
+@SpringBootTest
+public class AuthenticateControllerTest extends BasicControllerTest{
 
-    private MockMvc mvc;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private WebApplicationContext context;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    @MockBean
+    private AnnouncementServiceImpl announcementService;
 
-    @BeforeEach
-    public void setup() {
-        this.mvc = MockMvcBuilders
-                .webAppContextSetup(this.context)
-                .dispatchOptions(true)
-                .apply(springSecurity())
-                .build();
+    @Before
+    public void init() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void generateToken() throws Exception {
-        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("userName",  "Name");
-        requestParams.add("password", "password");
+    public void getToken() throws Exception {
+        String accessToken = obtainAccessToken("User1");
 
-       // given(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-//                "userName", "password"))).willReturn(new UsernamePasswordAuthenticationToken("userName",
-//                "password"));
-        mvc.perform(
-                get("/announcement/getAll")
-                        .params(requestParams))
-                .andExpect(status().isOk());
+        Announcement announcement = AnnouncementBuilder.announcementBuilder();
+
+        List<Announcement> allAnnouncement = Arrays.asList(announcement);
+        given(announcementService.getVip()).willReturn(allAnnouncement);
+
+        mvc.perform(get("/announcement/getAll")
+                .header("Authorization", "Bearer " + accessToken))
+                .andExpectAll(status().isOk(),
+                        content().contentType(MediaType.APPLICATION_JSON),
+                        MockMvcResultMatchers.jsonPath("$[0].id").value(announcement.getId()));
     }
 }

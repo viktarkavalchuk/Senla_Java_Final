@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -23,7 +22,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,6 +38,13 @@ public class AnnouncementControllerTest extends BasicControllerTest{
         MockitoAnnotations.openMocks(this);
     }
 
+
+    @Test
+    public void givenNoToken_whenGetAllSecureRequest_thenForbidden() throws Exception {
+        mvc.perform(get("/announcement/getAll"))
+                .andExpect(status().isForbidden());
+    }
+
     @Test
     public void announcementGetAll() throws Exception {
         String accessToken = obtainAccessToken("User1");
@@ -54,12 +59,6 @@ public class AnnouncementControllerTest extends BasicControllerTest{
                 .andExpectAll(status().isOk(),
                         content().contentType(MediaType.APPLICATION_JSON),
                         MockMvcResultMatchers.jsonPath("$[0].id").value(announcement.getId()));
-    }
-
-    @Test
-    public void givenNoToken_whenDeleteSecureRequest_thenForbidden() throws Exception {
-        mvc.perform(get("/announcement/getAll"))
-                .andExpect(status().isForbidden());
     }
 
     @Test

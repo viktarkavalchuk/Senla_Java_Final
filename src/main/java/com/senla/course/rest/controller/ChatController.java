@@ -38,9 +38,7 @@ public class ChatController {
     public ResponseEntity<?> getAll(@RequestParam(value = "Recipient") String recipient) {
 
         User userRequest = userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-
         List<Chat> chats = chatService.getChatByUser(userRequest.getLogin(), recipient);
-
         return new ResponseEntity<>(chats.stream().map(d -> converter.convertToDto(d, ChatDto.class))
                 .collect(Collectors.toList()),
                 HttpStatus.OK);

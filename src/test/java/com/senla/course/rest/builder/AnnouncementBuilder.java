@@ -5,7 +5,7 @@ import com.senla.course.announcementPlatform.model.Announcement;
 import java.util.Date;
 
 import static com.senla.course.rest.builder.CommentBuilder.commentBuilder;
-import static com.senla.course.rest.builder.UserBuilder.userBuilder;
+import static com.senla.course.rest.builder.UserBuilder.userBuilderUser1;
 
 public class AnnouncementBuilder {
 
@@ -14,7 +14,7 @@ public class AnnouncementBuilder {
         Announcement announcement = new Announcement();
         announcement.setId(1);
         announcement.setName("Announcement");
-        announcement.setUser(userBuilder());
+        announcement.setUser(userBuilderUser1());
         announcement.setRating(5.0);
         announcement.setVip(false);
         announcement.setDescription("Description");
