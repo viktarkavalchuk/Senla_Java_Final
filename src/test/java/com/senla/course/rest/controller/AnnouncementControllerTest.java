@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringBootTest
-public class AnnouncementControllerTest extends BasicControllerTest{
+public class AnnouncementControllerTest extends BasicControllerTest {
 
     @MockBean
     private AnnouncementServiceImpl announcementService;
