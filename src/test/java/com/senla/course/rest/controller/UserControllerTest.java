@@ -21,6 +21,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,13 +38,7 @@ public class UserControllerTest extends BasicControllerTest {
     }
 
     @Test
-    public void givenNoToken_whenGetAllUsersSequreRequest_thenForbidden() throws Exception {
-        mvc.perform(get("/user/getAllUsers"))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    public void getAllUsers() throws Exception {
+    public void getAllUsers_whenAuthorizationIsAdmin_thenOk() throws Exception {
         String accessToken = obtainAccessToken("Admin");
         List<User> users = new ArrayList<>();
         users.add(UserBuilder.userBuilderUser1());
@@ -53,12 +48,12 @@ public class UserControllerTest extends BasicControllerTest {
                 get("/user/getAllUsers")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(users.get(0).getId()))
                 .andExpect(status().isOk());
-        MockMvcResultMatchers.jsonPath("$[0].id").value(users.get(0).getId());
     }
 
     @Test
-    public void deleteUser_whenDeleteSecureRequest_thenOk() throws Exception {
+    public void givenToken_whenDeleteSecureRequest_thenOk() throws Exception {
         String accessToken = obtainAccessToken("Admin");
         doNothing().when(userService).delete(anyInt());
 
@@ -77,8 +72,8 @@ public class UserControllerTest extends BasicControllerTest {
                 post("/user?name=Ivan&email=Ivan@mail.com&telephone_Number=+375331112233&login=user000&password=password&ROLES=2")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.userName").value("Ivan"))
                 .andExpect(status().isOk());
-        MockMvcResultMatchers.jsonPath("$.userName").value("Ivan");
     }
 
     @Test
@@ -89,7 +84,6 @@ public class UserControllerTest extends BasicControllerTest {
                 post("/user?name=Ivan&email=Ivan@mail.com&telephone_Number=+375331112233&login=user000&password=password&ROLES=2")
                         .header("Authorization", "Bearer " + accessToken)
                         .contentType(MediaType.APPLICATION_JSON))
-
                 .andExpect(status().isForbidden());
     }
 }

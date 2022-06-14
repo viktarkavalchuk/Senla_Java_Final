@@ -20,7 +20,6 @@ public class AnnouncementBuilder {
         announcement.setDescription("Description");
         announcement.setStartDate(new Date());
         announcement.setPrice(100);
-        announcement.setComments(commentBuilder());
 
         return announcement;
     }

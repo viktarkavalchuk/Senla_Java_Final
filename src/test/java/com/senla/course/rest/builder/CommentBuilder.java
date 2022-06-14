@@ -15,6 +15,7 @@ public class CommentBuilder {
         comment.setId(1);
         comment.setBodyComment("Comment_1");
         comment.setUserSender(userBuilderUser1());
+        comment.setAnnouncement(AnnouncementBuilder.announcementBuilder());
         List<Comment> list = new ArrayList<>();
         list.add(comment);
 

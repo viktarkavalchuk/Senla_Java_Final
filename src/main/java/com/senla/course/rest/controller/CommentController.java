@@ -29,7 +29,6 @@ public class CommentController {
     private final UserServiceImpl userService;
     private final BasicConverter<Comment, CommentDto> converter;
 
-
     public CommentController(CommentServiceImpl commentService, AnnouncementServiceImpl announcementService, UserServiceImpl userService, BasicConverter<Comment, CommentDto> converter) {
         this.commentService = commentService;
         this.announcementService = announcementService;
@@ -37,6 +36,7 @@ public class CommentController {
         this.converter = converter;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllComments")
     public ResponseEntity<?> getAllComments() {
 

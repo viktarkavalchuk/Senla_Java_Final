@@ -14,10 +14,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,27 +33,21 @@ public class ChatControllerTest extends BasicControllerTest {
     private UserServiceImpl userService;
 
     @Test
-    public void givenNoToken_whenGetAllSequreRequest_thenForbidden() throws Exception {
-        mvc.perform(get("/chat/getMessage?Recipient=User2"))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    public void getAllMessagesToUser1() throws Exception {
+    public void getAllMessages_whenAuthorizationIsUser1_thenOk() throws Exception {
         String accessToken = obtainAccessToken("User1");
-        given(userService.getByLogin(any(String.class))).willReturn(UserBuilder.userBuilderUser1());
-        given(chatService.getChatByUser(any(String.class),any(String.class))).willReturn(ChatBuilder.chatsBuilder());
+        given(userService.getByLogin(anyString())).willReturn(UserBuilder.userBuilderUser1());
+        given(chatService.getChatByUser(anyString(),anyString())).willReturn(ChatBuilder.chatsBuilder());
 
         mvc.perform(
                 get("/chat/getMessage?Recipient=User2")
-                        .header("Authorization", "Bearer " + accessToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-                MockMvcResultMatchers.jsonPath("$[0].message").value("Message");
+                    .header("Authorization", "Bearer " + accessToken)
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(jsonPath("$[0].message").value("Message"))
+                    .andExpect(status().isOk());
     }
 
     @Test
-    public void createChatMessageToUser2() throws Exception {
+    public void CreateChatMessage_whenAuthorizationIsUser2_thenOk() throws Exception {
         given(userService.getByLogin("User1")).willReturn(UserBuilder.userBuilderUser1());
         given(userService.getByLogin("User2")).willReturn(UserBuilder.userBuilderUser2());
 
@@ -59,9 +55,9 @@ public class ChatControllerTest extends BasicControllerTest {
 
         mvc.perform(
                 post("/chat?recipient=User2&message=Hello World")
-                        .header("Authorization", "Bearer " + accessToken)
-                        .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isOk());
-        MockMvcResultMatchers.jsonPath("$.message").value("Hello World");
+                    .header("Authorization", "Bearer " + accessToken)
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(jsonPath("$.message").value("Hello World"))
+                    .andExpect(status().isOk());
     }
 }

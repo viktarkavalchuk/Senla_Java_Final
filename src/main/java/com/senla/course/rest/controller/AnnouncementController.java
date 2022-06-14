@@ -138,6 +138,9 @@ public class AnnouncementController {
                 if (name != null) {
                     announcement.setName(name);
                 }
+                if (price != null) {
+                    announcement.setPrice(price);
+                }
                 if (description != null) {
                     announcement.setDescription(description);
                 }

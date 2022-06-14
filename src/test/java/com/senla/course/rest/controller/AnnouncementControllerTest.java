@@ -20,10 +20,9 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -38,15 +37,8 @@ public class AnnouncementControllerTest extends BasicControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
-    public void givenNoToken_whenGetAllSecureRequest_thenForbidden() throws Exception {
-        mvc.perform(get("/announcement/getAll"))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    public void announcementGetAll() throws Exception {
+    public void getAllAnnouncements_whenAuthorizationIsUser1_thenOk() throws Exception {
         String accessToken = obtainAccessToken("User1");
 
         Announcement announcement = AnnouncementBuilder.announcementBuilder();
@@ -57,12 +49,38 @@ public class AnnouncementControllerTest extends BasicControllerTest {
         mvc.perform(get("/announcement/getAll")
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpectAll(status().isOk(),
-                        content().contentType(MediaType.APPLICATION_JSON),
-                        MockMvcResultMatchers.jsonPath("$[0].id").value(announcement.getId()));
+                    content().contentType(MediaType.APPLICATION_JSON),
+                    jsonPath("$[0].id").value(announcement.getId()));
     }
 
     @Test
-    public void deleteAnnouncement_whenDeleteSecureRequest_thenForbidden() throws Exception {
+    public void createAnnouncement_whenAuthorizationIsUser1_thenOk() throws Exception {
+        String accessToken = obtainAccessToken("User1");
+
+        mvc.perform(
+                post("/announcement/?name=Telephone Nokia 4110&price=75&description=Almost like new")
+                    .header("Authorization", "Bearer " + accessToken)
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.price").value("75"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateAnnouncement_whenAuthorizationIsUser1_thenOk() throws Exception {
+        String accessToken = obtainAccessToken("User1");
+        Announcement announcement = AnnouncementBuilder.announcementBuilder();
+        given(announcementService.getById(anyInt())).willReturn(announcement);
+
+        mvc.perform(
+                patch("/announcement/8?price=10&description=Cost reduced")
+                        .header("Authorization", "Bearer " + accessToken)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.price").value(10))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteAnnouncement_whenAuthorizationIsUser1_thenForbidden() throws Exception {
         String accessToken = obtainAccessToken("User1");
         doNothing().when(announcementService).delete(anyInt());
 
@@ -71,15 +89,15 @@ public class AnnouncementControllerTest extends BasicControllerTest {
                 .andExpect(status().isForbidden());
         verifyNoMoreInteractions(announcementService);
     }
+
     @Test
-    public void deleteAnnouncement_whenDeleteSecureRequest_thenOk() throws Exception {
+    public void deleteAnnouncement_whenAuthorizationIsAdmin_thenOk() throws Exception {
         String accessToken = obtainAccessToken("Admin");
         doNothing().when(announcementService).delete(anyInt());
 
         mvc.perform(delete("/announcement/1")
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk());
-
         verify(announcementService).delete(1);
         verifyNoMoreInteractions(announcementService);
     }
