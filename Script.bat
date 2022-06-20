@@ -15,3 +15,4 @@ echo\
 echo ---------------------- Preparing WAR file ----------------------
 echo\
 mvn install
+

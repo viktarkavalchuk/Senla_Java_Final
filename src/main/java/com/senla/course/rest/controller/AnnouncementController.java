@@ -6,11 +6,11 @@ import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.AnnouncementDto;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping(value = "/announcement", produces = MediaType.APPLICATION_JSON_VALUE)
+@SecurityRequirement(name = "Bearer Authentication")
+@RequestMapping(value = "/announcement")
 public class AnnouncementController {
 
     private static final Logger logger = LoggerFactory.getLogger(AnnouncementController.class);

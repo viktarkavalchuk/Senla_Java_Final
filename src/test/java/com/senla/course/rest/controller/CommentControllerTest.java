@@ -2,12 +2,10 @@ package com.senla.course.rest.controller;
 
 import com.senla.course.announcementPlatform.model.Announcement;
 import com.senla.course.announcementPlatform.model.Comment;
-import com.senla.course.announcementPlatform.model.User;
 import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.CommentServiceImpl;
 import com.senla.course.rest.builder.AnnouncementBuilder;
 import com.senla.course.rest.builder.CommentBuilder;
-import com.senla.course.rest.builder.UserBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -27,7 +23,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

@@ -8,6 +8,7 @@ import com.senla.course.announcementPlatform.service.CommentServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.CommentDto;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/comment")
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);

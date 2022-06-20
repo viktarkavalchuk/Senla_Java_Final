@@ -4,7 +4,6 @@ import com.senla.course.announcementPlatform.model.Announcement;
 
 import java.util.Date;
 
-import static com.senla.course.rest.builder.CommentBuilder.commentBuilder;
 import static com.senla.course.rest.builder.UserBuilder.userBuilderUser1;
 
 public class AnnouncementBuilder {

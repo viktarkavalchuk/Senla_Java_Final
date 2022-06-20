@@ -7,6 +7,7 @@ import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.UserDto;
 import com.senla.course.security.dao.RoleDao;
 import com.senla.course.security.model.Role;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/user")
 public class UserController {
 
