@@ -15,7 +15,8 @@ The "Private_announcements" schema will also be created in your DB.
 
 This service makes use of features introduced in Tomcat 9 so deploy this service via the Tomcat 9+ 
 administration UI. Once installed ensure it is enabled via the UI, and then you should be able to make a request 
-to `http://{yourhost}:8080/Senla_Java_Final-1.0/authenticate`, with JSON body 
+to `http://localhost:8080/Senla_Java_Final-1.0/authenticate`, with JSON body 
+
 {
     "userName": {userName},
     "password": {password}
@@ -34,10 +35,9 @@ You will receive a Bearer token.
 
 ## Examples API
 
-The API of this service provides a number of endpoints that clients use. They
-are listed below, and they are called via HTTP requests.
+The API of this service provides a number of endpoints that clients use. 
+For the convenience of testing the application and verifying functionality, Swagger/Open API is used at:
+http://localhost:8080/Senla_Java_Final-1.0/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
 
-http://{yourhost}:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
-http://localhost:8080/Senla_Java_Final-1.0/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#
-/v3/api-docs
-http://localhost:8080/v3/api-docs
+If you run the application through the development environment, use the address:
+http://localhost:8080/swagger-ui/index.html#/
