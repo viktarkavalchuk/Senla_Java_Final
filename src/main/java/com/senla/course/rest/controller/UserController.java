@@ -7,7 +7,9 @@ import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.UserDto;
 import com.senla.course.security.dao.RoleDao;
 import com.senla.course.security.model.Role;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Tag(name = "User Controller", description = "Application Users")
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/user")
@@ -44,6 +47,10 @@ public class UserController {
         this.converter = converter;
     }
 
+    @Operation(
+            summary = "Get all users (only for Admin)",
+            description = "Get a list of all users"
+    )
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllUsers")
     public ResponseEntity<?> getAllUsers() {
@@ -53,6 +60,10 @@ public class UserController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "User Registration (only for Admin)",
+            description = "Get a list of all users"
+    )
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<?> registration(@RequestParam("name") String name,
@@ -81,6 +92,7 @@ public class UserController {
         return new ResponseEntity<>(converter.convertToDto(user, UserDto.class), HttpStatus.OK);
     }
 
+    @Operation(summary = "Updating user data")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PatchMapping
     public ResponseEntity<?> update(@RequestParam(value = "name", required = false) String name,
@@ -116,6 +128,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Removing a user from the application (only for Admin)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) throws NoResultException {

@@ -6,7 +6,9 @@ import com.senla.course.announcementPlatform.service.AnnouncementServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.AnnouncementDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Tag(name = "Announcement Controller", description = "Private ads, creation, editing, deletion")
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping(value = "/announcement")
@@ -40,6 +42,10 @@ public class AnnouncementController {
         this.converter = converter;
     }
 
+    @Operation(
+            summary = "Get all announcements",
+            description = "Allows you to get a list of all available ads"
+    )
     @GetMapping("/getAll")
     public ResponseEntity<?> getAnnouncement() {
         List<Announcement> vip = announcementService.getVip();
@@ -50,7 +56,10 @@ public class AnnouncementController {
 
         return new ResponseEntity<>(vip.stream().map(d -> converter.convertToDto(d, AnnouncementDto.class)), HttpStatus.OK);
     }
-
+    @Operation(
+            summary = "Get announcements, filter by name",
+            description = "Allows you to get a list of all available ads, filter by the name of the ad"
+    )
     @GetMapping("/getByName")
     public ResponseEntity<?> getAnnouncementByName(@RequestParam String name) {
         List<Announcement> getByName = announcementService.getAll()
@@ -61,6 +70,10 @@ public class AnnouncementController {
                 HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get announcements, filter by name and price",
+            description = "Allows you to get a list of all available ads, filter by ad name and price"
+    )
     @GetMapping("/getByNameAndPrice")
     public ResponseEntity<?> getAnnouncementByNameAndPrice(@RequestParam String name, Integer price) {
         List<Announcement> getByNameAndPrice = announcementService.getAll()
@@ -73,6 +86,10 @@ public class AnnouncementController {
                 HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get announcements, filter by price",
+            description = "Allows you to get a list of all available ads, filter by price"
+    )
     @GetMapping("/getByPriceLowerThan")
     public ResponseEntity<?> getAnnouncementByPrice(@RequestParam Integer price) {
         List<Announcement> getByPrice = announcementService.getAll()
@@ -83,6 +100,10 @@ public class AnnouncementController {
                 HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get all sold ads",
+            description = "Allows you to get a list of all closed ads"
+    )
     @GetMapping("/getSalesHistory")
     public ResponseEntity<?> getAllSalesHistory() {
         List<Announcement> getSalesHistoryByUser = announcementService.getClosedAnnouncements();
@@ -92,6 +113,10 @@ public class AnnouncementController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get sold ads by Id",
+            description = "Get a list of closed ads by User Id"
+    )
     @GetMapping("/getSalesHistory/{id}")
     public ResponseEntity<?> getSalesHistory(@PathVariable("id") int id) {
         User user = userService.getById(id);
@@ -105,6 +130,10 @@ public class AnnouncementController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Set announcement as VIP or not VIP (only for Admin)",
+            description = "A user with the ADMIN role can set VIP status"
+    )
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/vip/{id}")
     public ResponseEntity<?> setVip(@PathVariable("id") int id,
@@ -122,6 +151,7 @@ public class AnnouncementController {
         }
     }
 
+    @Operation(summary = "Update announcement")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateAnnouncement(@PathVariable("id") int id,
@@ -164,6 +194,10 @@ public class AnnouncementController {
         }
     }
 
+    @Operation(
+            summary = "Create announcement",
+            description = "Allows you to create an ad, you need to specify the name of the ad, price and description"
+    )
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createAnnouncement(@RequestParam(value = "name") String name,
@@ -185,6 +219,7 @@ public class AnnouncementController {
         return new ResponseEntity<>(converter.convertToDto(announcement, AnnouncementDto.class), HttpStatus.OK);
     }
 
+    @Operation(summary = "Delete announcement (only for Admin)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {

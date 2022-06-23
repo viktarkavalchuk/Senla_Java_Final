@@ -26,6 +26,4 @@ public class RootConfig {
         driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;
     }
-
-
 }

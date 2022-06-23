@@ -6,7 +6,9 @@ import com.senla.course.announcementPlatform.service.ChatServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.ChatDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Chat Controller", description = "Organization of personal correspondence between the buyer and the seller")
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/chat")
@@ -35,6 +38,7 @@ public class ChatController {
         this.converter = converter;
     }
 
+    @Operation(summary = "Get all messages for this authorized user")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/getMessage")
     public ResponseEntity<?> getAll(@RequestParam(value = "Recipient") String recipient) {
@@ -46,6 +50,7 @@ public class ChatController {
                 HttpStatus.OK);
     }
 
+    @Operation(summary = "Write a message to the user")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createChatMessage(@RequestParam(value = "recipient") String recipient,

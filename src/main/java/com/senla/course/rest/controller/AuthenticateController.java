@@ -2,6 +2,8 @@ package com.senla.course.rest.controller;
 
 import com.senla.course.security.model.AuthRequest;
 import com.senla.course.security.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Authentication Controller", description = "Allows you to get a JWT key by username and password of the user")
 @RestController
 @RequestMapping("/")
 public class AuthenticateController {
@@ -30,6 +33,7 @@ public class AuthenticateController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Operation(description = "Enter your username and password")
     @PostMapping("/authenticate")
     public ResponseEntity<?> generateToken(@RequestBody AuthRequest authRequest) {
         ResponseEntity<String> responseEntity = null;

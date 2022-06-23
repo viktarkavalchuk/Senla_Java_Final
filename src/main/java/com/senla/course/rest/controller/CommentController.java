@@ -8,7 +8,9 @@ import com.senla.course.announcementPlatform.service.CommentServiceImpl;
 import com.senla.course.announcementPlatform.service.UserServiceImpl;
 import com.senla.course.rest.converter.BasicConverter;
 import com.senla.course.rest.dto.CommentDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "Comment Controller", description = "Comments on the ad")
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/comment")
@@ -38,6 +41,10 @@ public class CommentController {
         this.converter = converter;
     }
 
+    @Operation(
+            summary = "Get all comments (only for Admin)",
+            description = "Get all comments on all ads"
+    )
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllComments")
     public ResponseEntity<?> getAllComments() {
@@ -49,6 +56,10 @@ public class CommentController {
                 HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "Get all comments by Announcement",
+            description = "Get all comments on the ad"
+    )
     @GetMapping("/getCommentsByAnnouncement")
     public ResponseEntity<?> getCommentsByAnnouncement(@RequestParam(value = "announcement") Integer id) {
         logger.info("GET: try to get CommentsByAnnouncement, ID Announcement: " + id);
@@ -65,6 +76,7 @@ public class CommentController {
         }
     }
 
+    @Operation(summary = "Create a comment to the Announcement")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity<?> createComment(@RequestParam(value = "announcementId") Integer id,
@@ -80,5 +92,4 @@ public class CommentController {
 
         return new ResponseEntity<>(converter.convertToDto(comment, CommentDto.class), HttpStatus.OK);
     }
-
 }
